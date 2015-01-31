@@ -81,6 +81,29 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                 shopPriceLabel.hidden=true
             }
             
+            //Set opening hours
+            let openingHoursDict = venue.objectForKey("hours") as NSDictionary?
+            if let openingHours = openingHoursDict?.objectForKey("status") as String? {
+                //Has status
+                openingStatusLabel.hidden=false
+                openingStatusLabel.text = openingHours
+                
+                if let isOpen = openingHoursDict?.objectForKey("isOpen") as Bool?{
+                    //Know if its open or not
+                    if isOpen{
+                        openingStatusLabel.textColor = UIColor.greenColor()
+                    }else{
+                        openingStatusLabel.textColor = UIColor.redColor()
+                    }
+                }else{
+                    //Don't know if open
+                    openingStatusLabel.textColor=UIColor.blackColor()
+                }
+            }else{
+                //Does not have status
+                openingStatusLabel.hidden = true
+            }
+            
             //Set Image
             self.shopImage.image = UIImage(named: "PlaceholderImage")
             if let photo = venue.objectForKey("featuredPhotos") as NSDictionary? {

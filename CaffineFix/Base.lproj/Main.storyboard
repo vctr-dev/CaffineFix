@@ -10,18 +10,18 @@
         <scene sceneID="S3T-DL-fRp">
             <objects>
                 <tableViewController id="jYC-Ao-cTA" customClass="CoffeeListTableViewController" customModule="CaffineFix" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="22" sectionFooterHeight="22" id="RvQ-3O-xey">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" id="RvQ-3O-xey">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Mgo-Rg-i1P" customClass="CoffeeEntryTableViewCell" customModule="CaffineFix" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="96" id="Mgo-Rg-i1P" customClass="CoffeeEntryTableViewCell" customModule="CaffineFix" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mgo-Rg-i1P" id="HXd-uC-RTy">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2AR-96-O9t">
-                                            <rect key="frame" x="542" y="40" width="50" height="24"/>
+                                            <rect key="frame" x="542" y="8" width="50" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -40,13 +40,13 @@
                                             </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Restaurant Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVq-sv-vzW">
-                                            <rect key="frame" x="81" y="8" width="134" height="21"/>
+                                            <rect key="frame" x="81" y="8" width="134" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnv-f5-NdS">
-                                            <rect key="frame" x="81" y="32" width="128" height="29"/>
+                                            <rect key="frame" x="81" y="41" width="128" height="29"/>
                                             <string key="text">Address
 Second line of address</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -54,7 +54,7 @@ Second line of address</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feK-A7-bVA">
-                                            <rect key="frame" x="81" y="64" width="27" height="14"/>
+                                            <rect key="frame" x="81" y="73" width="27" height="14"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="$$$$">
                                                     <attributes>
@@ -66,37 +66,40 @@ Second line of address</string>
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-DI-Zkz">
-                                            <rect key="frame" x="113" y="64" width="60" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-DI-Zkz">
+                                            <rect key="frame" x="532" y="37" width="60" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-50" id="1fJ-7v-Vgr"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="16M-l6-ddW" secondAttribute="bottom" id="2aM-IP-xyv"/>
+                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="42F-VM-uEj"/>
                                         <constraint firstItem="uVq-sv-vzW" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-50" id="7xp-YE-Fri"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="top" secondItem="uVq-sv-vzW" secondAttribute="bottom" constant="3" id="8Ew-ez-Zvh"/>
-                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="centerY" secondItem="feK-A7-bVA" secondAttribute="centerY" id="8Su-X4-dJ5"/>
+                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="top" secondItem="2AR-96-O9t" secondAttribute="bottom" constant="5" id="9v8-9f-Ldm"/>
                                         <constraint firstItem="16M-l6-ddW" firstAttribute="leading" secondItem="HXd-uC-RTy" secondAttribute="leadingMargin" id="Bqz-en-ADB"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="feK-A7-bVA" secondAttribute="bottom" id="IgX-4A-lxj"/>
                                         <constraint firstItem="2AR-96-O9t" firstAttribute="trailing" secondItem="HXd-uC-RTy" secondAttribute="trailingMargin" id="Iuz-Fk-Yxu"/>
-                                        <constraint firstItem="uVq-sv-vzW" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-50" id="KtD-2M-VV5"/>
-                                        <constraint firstItem="Hnv-f5-NdS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-50" id="ODh-u0-bpd"/>
+                                        <constraint firstItem="uVq-sv-vzW" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-20" id="KtD-2M-VV5"/>
+                                        <constraint firstItem="2AR-96-O9t" firstAttribute="centerY" secondItem="uVq-sv-vzW" secondAttribute="centerY" id="MEu-bH-uk4"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="U9P-DI-Zkz" secondAttribute="bottom" id="R32-vM-Bpr"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="top" secondItem="uVq-sv-vzW" secondAttribute="bottom" constant="3" id="TeN-v4-Opu"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="X7r-4K-iKE"/>
                                         <constraint firstItem="16M-l6-ddW" firstAttribute="top" secondItem="HXd-uC-RTy" secondAttribute="topMargin" id="Xzn-ec-c62"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="feK-A7-bVA" secondAttribute="bottom" id="eFh-sx-gWQ"/>
                                         <constraint firstItem="uVq-sv-vzW" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="lCf-9w-Lib"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="bottom" secondItem="HXd-uC-RTy" secondAttribute="bottomMargin" id="nV6-Tk-ftF"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="16M-l6-ddW" secondAttribute="bottom" id="naQ-Ku-CHt"/>
                                         <constraint firstItem="2AR-96-O9t" firstAttribute="top" secondItem="HXd-uC-RTy" secondAttribute="topMargin" id="nyv-l7-ATf"/>
-                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="leading" secondItem="feK-A7-bVA" secondAttribute="trailing" constant="5" id="pJ2-dI-quW"/>
-                                        <constraint firstAttribute="centerY" secondItem="2AR-96-O9t" secondAttribute="centerY" id="pal-4R-tTb"/>
                                         <constraint firstItem="feK-A7-bVA" firstAttribute="top" secondItem="Hnv-f5-NdS" secondAttribute="bottom" constant="3" id="q3V-ui-HCo"/>
                                         <constraint firstItem="16M-l6-ddW" firstAttribute="top" secondItem="HXd-uC-RTy" secondAttribute="topMargin" id="qSa-8g-JoA"/>
+                                        <constraint firstItem="Hnv-f5-NdS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="U9P-DI-Zkz" secondAttribute="leading" constant="-10" id="rWC-Zy-Dkq"/>
+                                        <constraint firstItem="2AR-96-O9t" firstAttribute="top" secondItem="uVq-sv-vzW" secondAttribute="top" id="tDo-ME-ASi"/>
+                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="top" secondItem="feK-A7-bVA" secondAttribute="bottom" constant="3" id="tFn-sJ-ir2"/>
                                         <constraint firstItem="uVq-sv-vzW" firstAttribute="top" secondItem="HXd-uC-RTy" secondAttribute="topMargin" id="tuB-Xl-FUa"/>
                                         <constraint firstItem="feK-A7-bVA" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="xZ2-bw-qUN"/>
+                                        <constraint firstItem="2AR-96-O9t" firstAttribute="trailing" secondItem="U9P-DI-Zkz" secondAttribute="trailing" id="yAD-90-kbC"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -105,6 +108,10 @@ Second line of address</string>
                                             <exclude reference="7xp-YE-Fri"/>
                                             <exclude reference="TeN-v4-Opu"/>
                                             <exclude reference="nV6-Tk-ftF"/>
+                                            <exclude reference="42F-VM-uEj"/>
+                                            <exclude reference="R32-vM-Bpr"/>
+                                            <exclude reference="tFn-sJ-ir2"/>
+                                            <exclude reference="MEu-bH-uk4"/>
                                             <exclude reference="nyv-l7-ATf"/>
                                         </mask>
                                     </variation>
