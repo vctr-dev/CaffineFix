@@ -14,7 +14,7 @@ class CoffeeListTableViewController: UITableViewController {
     let venuePhotos = 1
     let sortByDistance = 1
     let openNow = 0
-    let resultLimit = Int.max
+//    let resultLimit = Int.max
     var venueList:NSArray = NSArray()
 
     override func viewDidLoad() {
@@ -27,16 +27,6 @@ class CoffeeListTableViewController: UITableViewController {
         
         self.refreshControl?.beginRefreshing()
         self.refresh()
-        
-        //TODO !!!!get location!!!!
-        //TODO !!!!current location must be updated continuously, after every 50m walked, only when app is active!!!!
-        //TODO !!!unit testing!!!
-        //TODO !!!Readme file!!!
-        //TODO (optional) !!when updating automatically, show feedback that it is being updated!!
-        //TODO (optional) !!after updating, if automatically, scroll back to the page i was previously!!
-        //TODO (optional) !detail view!
-        //TODO (optional) !calling!
-        //TODO (optional) !get directions!
         
     }
     
@@ -58,7 +48,7 @@ class CoffeeListTableViewController: UITableViewController {
     func getDataFromServer(latLong:String){
         
         // Creating URL request
-        var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)&limit=\(resultLimit)"
+        var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
         var url = NSURL(string: urlString)
         var urlRequest = NSURLRequest(URL: url!)
         
