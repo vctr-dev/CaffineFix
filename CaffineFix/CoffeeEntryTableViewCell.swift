@@ -72,20 +72,19 @@ class CoffeeEntryTableViewCell: UITableViewCell {
             let priceRatingDict = venue.objectForKey("price") as NSDictionary?
             
             if let priceRating = priceRatingDict?.objectForKey("tier") as Int?{
-                shopPriceLabel.hidden=false
+                shopPriceLabel.attributedText=NSAttributedString(string: "$$$$", attributes: [NSForegroundColorAttributeName:UIColor.grayColor(),NSFontAttributeName:UIFont.systemFontOfSize(shopPriceLabel.font.pointSize)])
                 let priceString = NSMutableAttributedString(attributedString: shopPriceLabel.attributedText)
                 priceString.setAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:UIFont.boldSystemFontOfSize(shopPriceLabel.font.pointSize)], range: NSMakeRange(0, priceRating))
                 shopPriceLabel.attributedText = priceString
             }else{
-                //No price ratings
-                shopPriceLabel.hidden=true
+                shopPriceLabel.attributedText=NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor.grayColor(),NSFontAttributeName:UIFont.systemFontOfSize(shopPriceLabel.font.pointSize)])
             }
             
             //Set opening hours
+            openingStatusLabel.text=""
             let openingHoursDict = venue.objectForKey("hours") as NSDictionary?
             if let openingHours = openingHoursDict?.objectForKey("status") as String? {
                 //Has status
-                openingStatusLabel.hidden=false
                 openingStatusLabel.text = openingHours
                 
                 if let isOpen = openingHoursDict?.objectForKey("isOpen") as Bool?{
@@ -101,7 +100,6 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                 }
             }else{
                 //Does not have status
-                openingStatusLabel.hidden = true
             }
             
             //Set Image
@@ -118,7 +116,9 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                     let photoRes = "\(self.thumbnailRes)x\(self.thumbnailRes)"
                     var urlString = "\(photoUrlPrefix)\(photoRes)\(photoUrlSuffix)"
                     
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible=true
                     let image: UIImage? = UIImage(data: NSData(contentsOfURL: NSURL(string: urlString)!)!)
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible=false
                     
                     dispatch_async(dispatch_get_main_queue()){
                         self.shopImage.image = image

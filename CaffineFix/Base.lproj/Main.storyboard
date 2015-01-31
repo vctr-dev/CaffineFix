@@ -21,7 +21,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2AR-96-O9t">
-                                            <rect key="frame" x="542" y="8" width="50" height="24"/>
+                                            <rect key="frame" x="542" y="36" width="50" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -53,6 +53,12 @@ Second line of address</string>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-DI-Zkz">
+                                            <rect key="frame" x="116" y="72" width="60" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feK-A7-bVA">
                                             <rect key="frame" x="81" y="73" width="27" height="14"/>
                                             <attributedString key="attributedText">
@@ -66,12 +72,6 @@ Second line of address</string>
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Now" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9P-DI-Zkz">
-                                            <rect key="frame" x="532" y="37" width="60" height="15"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="16M-l6-ddW" secondAttribute="bottom" id="2aM-IP-xyv"/>
@@ -80,6 +80,7 @@ Second line of address</string>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="top" secondItem="uVq-sv-vzW" secondAttribute="bottom" constant="3" id="8Ew-ez-Zvh"/>
                                         <constraint firstItem="U9P-DI-Zkz" firstAttribute="top" secondItem="2AR-96-O9t" secondAttribute="bottom" constant="5" id="9v8-9f-Ldm"/>
                                         <constraint firstItem="16M-l6-ddW" firstAttribute="leading" secondItem="HXd-uC-RTy" secondAttribute="leadingMargin" id="Bqz-en-ADB"/>
+                                        <constraint firstAttribute="centerY" secondItem="2AR-96-O9t" secondAttribute="centerY" id="Hud-dE-Kpp"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="feK-A7-bVA" secondAttribute="bottom" id="IgX-4A-lxj"/>
                                         <constraint firstItem="2AR-96-O9t" firstAttribute="trailing" secondItem="HXd-uC-RTy" secondAttribute="trailingMargin" id="Iuz-Fk-Yxu"/>
                                         <constraint firstItem="uVq-sv-vzW" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-20" id="KtD-2M-VV5"/>
@@ -88,6 +89,10 @@ Second line of address</string>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="top" secondItem="uVq-sv-vzW" secondAttribute="bottom" constant="3" id="TeN-v4-Opu"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="X7r-4K-iKE"/>
                                         <constraint firstItem="16M-l6-ddW" firstAttribute="top" secondItem="HXd-uC-RTy" secondAttribute="topMargin" id="Xzn-ec-c62"/>
+                                        <constraint firstItem="feK-A7-bVA" firstAttribute="centerY" secondItem="U9P-DI-Zkz" secondAttribute="centerY" constant="0.5" id="YgO-IO-tbJ"/>
+                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="leading" secondItem="feK-A7-bVA" secondAttribute="trailing" constant="8" id="bhh-Sp-6sv"/>
+                                        <constraint firstItem="Hnv-f5-NdS" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2AR-96-O9t" secondAttribute="leading" constant="-20" id="dbA-d4-Wm6"/>
+                                        <constraint firstItem="U9P-DI-Zkz" firstAttribute="top" secondItem="Hnv-f5-NdS" secondAttribute="bottom" constant="2" id="kOb-Sc-833"/>
                                         <constraint firstItem="uVq-sv-vzW" firstAttribute="leading" secondItem="16M-l6-ddW" secondAttribute="trailing" constant="8" id="lCf-9w-Lib"/>
                                         <constraint firstItem="Hnv-f5-NdS" firstAttribute="bottom" secondItem="HXd-uC-RTy" secondAttribute="bottomMargin" id="nV6-Tk-ftF"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="16M-l6-ddW" secondAttribute="bottom" id="naQ-Ku-CHt"/>
@@ -108,11 +113,15 @@ Second line of address</string>
                                             <exclude reference="7xp-YE-Fri"/>
                                             <exclude reference="TeN-v4-Opu"/>
                                             <exclude reference="nV6-Tk-ftF"/>
+                                            <exclude reference="rWC-Zy-Dkq"/>
                                             <exclude reference="42F-VM-uEj"/>
+                                            <exclude reference="9v8-9f-Ldm"/>
                                             <exclude reference="R32-vM-Bpr"/>
                                             <exclude reference="tFn-sJ-ir2"/>
                                             <exclude reference="MEu-bH-uk4"/>
                                             <exclude reference="nyv-l7-ATf"/>
+                                            <exclude reference="tDo-ME-ASi"/>
+                                            <exclude reference="yAD-90-kbC"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
