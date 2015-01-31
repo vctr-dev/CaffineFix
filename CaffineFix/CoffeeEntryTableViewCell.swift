@@ -21,7 +21,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
     var venue: NSDictionary = NSDictionary(){
         didSet{
             //Set shop name
-            shopNameLabel.text=""
+            
             if let shopName = venue.objectForKey("name") as? String{
                 shopNameLabel.text = shopName
             }
@@ -29,7 +29,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
             let location: NSDictionary = venue.objectForKey("location") as NSDictionary
             
             //Set shop address
-            shopAddressLabel.text=""
+            
             if let address = location.objectForKey("address") as? String{
                 shopAddressLabel.text="\(address)"
             }
@@ -81,7 +81,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
             }
             
             //Set opening hours
-            openingStatusLabel.text=""
+            
             let openingHoursDict = venue.objectForKey("hours") as NSDictionary?
             if let openingHours = openingHoursDict?.objectForKey("status") as String? {
                 //Has status
@@ -103,7 +103,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
             }
             
             //Set Image
-            self.shopImage.image = UIImage(named: "PlaceholderImage")
+            
             if let photo = venue.objectForKey("featuredPhotos") as NSDictionary? {
                 //Has Photo
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)){
@@ -132,7 +132,12 @@ class CoffeeEntryTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        shopNameLabel.text=""
+        shopAddressLabel.text=""
+        openingStatusLabel.text=""
+        self.shopImage.image = UIImage(named: "PlaceholderImage")
+        shopImage.layer.masksToBounds=true
+        shopImage.layer.cornerRadius = 5.0
     }
 
 }
