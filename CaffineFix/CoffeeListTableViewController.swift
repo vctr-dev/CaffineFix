@@ -30,14 +30,13 @@ class CoffeeListTableViewController: UITableViewController {
         
         //TODO !!!!get location!!!!
         //TODO !!!!current location must be updated continuously, after every 50m walked, only when app is active!!!!
-        //TODO !!when updated automatically, show feedback that it is being updated!!
-        //TODO !!after updating, if automatically, scroll back to the page i was previously!!
         //TODO !!!unit testing!!!
         //TODO !!!Readme file!!!
-        //TODO paging
-        //TODO !detail view!
-        //TODO !calling!
-        //TODO !get directions!
+        //TODO (optional) !!when updating automatically, show feedback that it is being updated!!
+        //TODO (optional) !!after updating, if automatically, scroll back to the page i was previously!!
+        //TODO (optional) !detail view!
+        //TODO (optional) !calling!
+        //TODO (optional) !get directions!
         
     }
     
@@ -51,15 +50,15 @@ class CoffeeListTableViewController: UITableViewController {
     }
     
     func didReceiveLocation(){
-        self.getDataFromServer(testLL,offset: 0)
+        self.getDataFromServer(testLL)
     }
 
     // MARK: - Table view data source
     
-    func getDataFromServer(latLong:String, offset:NSInteger){
+    func getDataFromServer(latLong:String){
         
         // Creating URL request
-        var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)&limit=\(resultLimit)&offset=\(offset)"
+        var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)&limit=\(resultLimit)"
         var url = NSURL(string: urlString)
         var urlRequest = NSURLRequest(URL: url!)
         
@@ -82,7 +81,7 @@ class CoffeeListTableViewController: UITableViewController {
             var error: NSError?
             let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
             if let dict = jsonDict{
-                self.extractVenueListFromDict(dict, offset: offset, latLong: latLong)
+                self.extractVenueListFromDict(dict, latLong: latLong)
             }else{
                 //if jsonDict is nil means parsing has failed.
                 println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
@@ -91,7 +90,7 @@ class CoffeeListTableViewController: UITableViewController {
         })
     }
     
-    func extractVenueListFromDict(dict:NSDictionary, offset:NSInteger, latLong:String){
+    func extractVenueListFromDict(dict:NSDictionary, latLong:String){
         let responseDict = dict.objectForKey("response")! as NSDictionary
         let groupsArray = responseDict.objectForKey("groups")! as NSArray
         let groupsDict = groupsArray.firstObject as NSDictionary
