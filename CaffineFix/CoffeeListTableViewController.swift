@@ -14,12 +14,8 @@ class CoffeeListTableViewController: UITableViewController {
     let venuePhotos = 1
     let sortByDistance = 1
     let openNow = 0
-    let resultLimit = 100
-    var venueList:NSArray = NSArray(){
-        didSet{
-            self.tableView.reloadData()
-        }
-    }
+    let resultLimit = Int.max
+    var venueList:NSArray = NSArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +27,36 @@ class CoffeeListTableViewController: UITableViewController {
         
         self.refreshControl?.beginRefreshing()
         self.refresh()
+        
+        //TODO !!!!get location!!!!
+        //TODO !!!!current location must be updated continuously, after every 50m walked, only when app is active!!!!
+        //TODO !!when updated automatically, show feedback that it is being updated!!
+        //TODO !!after updating, if automatically, scroll back to the page i was previously!!
+        //TODO !!!unit testing!!!
+        //TODO !!!Readme file!!!
+        //TODO paging
+        //TODO !detail view!
+        //TODO !calling!
+        //TODO !get directions!
+        
     }
     
     func refresh(){
+        self.getLocation()
+    }
+    
+    func getLocation(){
+        
+        self.didReceiveLocation()//Proxy stud
+    }
+    
+    func didReceiveLocation(){
         self.getDataFromServer(testLL,offset: 0)
     }
 
-    // TODO pass data into cells for showing
     // MARK: - Table view data source
     
-    func getDataFromServer(latLong:NSString, offset:NSInteger){
+    func getDataFromServer(latLong:String, offset:NSInteger){
         
         // Creating URL request
         var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)&limit=\(resultLimit)&offset=\(offset)"
@@ -66,7 +82,7 @@ class CoffeeListTableViewController: UITableViewController {
             var error: NSError?
             let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
             if let dict = jsonDict{
-                self.extractVenueListFromDict(dict)
+                self.extractVenueListFromDict(dict, offset: offset, latLong: latLong)
             }else{
                 //if jsonDict is nil means parsing has failed.
                 println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
@@ -75,7 +91,7 @@ class CoffeeListTableViewController: UITableViewController {
         })
     }
     
-    func extractVenueListFromDict(dict:NSDictionary){
+    func extractVenueListFromDict(dict:NSDictionary, offset:NSInteger, latLong:String){
         let responseDict = dict.objectForKey("response")! as NSDictionary
         let groupsArray = responseDict.objectForKey("groups")! as NSArray
         let groupsDict = groupsArray.firstObject as NSDictionary
@@ -86,24 +102,31 @@ class CoffeeListTableViewController: UITableViewController {
         for result in resultList{
             venueList = venueList.arrayByAddingObject(result.objectForKey("venue")!)
         }
+        self.tableView.reloadData()
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         if venueList.count == 0{
             
-//            // Display a message when the table is empty
-//            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-//            
-//            messageLabel.text = "No data is currently available. Please pull down to refresh."
-//            messageLabel.textColor = UIColor.blackColor()
-//            messageLabel.numberOfLines = 0
-//            messageLabel.textAlignment = NSTextAlignment.Center
-//            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
-//            messageLabel.sizeToFit()
-//            
-//            self.tableView.backgroundView = messageLabel;
-//            
+            // Display a message when the table is empty
+            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            
+            if let refresher = self.refreshControl?{
+                if refresher.refreshing{
+                    messageLabel.text = "Refreshing..."
+                }else{
+                    messageLabel.text = "No data is currently available. Please pull down to refresh."
+                }
+            }
+            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = NSTextAlignment.Center
+            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+            messageLabel.sizeToFit()
+            
+            self.tableView.backgroundView = messageLabel;
+            
             self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
             
             return 0
@@ -122,7 +145,6 @@ class CoffeeListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as CoffeeEntryTableViewCell
         cell.venue = venueList.objectAtIndex(indexPath.row) as NSDictionary
-
         return cell
     }
 
@@ -135,5 +157,6 @@ class CoffeeListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
