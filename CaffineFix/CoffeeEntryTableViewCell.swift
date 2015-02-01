@@ -137,7 +137,9 @@ class CoffeeEntryTableViewCell: UITableViewCell {
         openingStatusLabel.text=""
         self.shopImage.image = UIImage(named: "PlaceholderImage")
         shopImage.layer.masksToBounds=true
-        shopImage.layer.cornerRadius = 5.0
+        //shopImage.layer.cornerRadius = 5.0
+        shopImage.layer.cornerRadius=shopImage.bounds.size.height/2
+        shopImage.layer.borderWidth=0
     }
 
 }
