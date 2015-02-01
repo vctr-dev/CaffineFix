@@ -18,12 +18,14 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     var venue:Venue?
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    var res = "500x100"
+    var res = "500x300"
     var phoneNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        featuredImage.clipsToBounds = true
+
         callCell.hidden = true
         if let venueItem = venue{
             //Set Name
