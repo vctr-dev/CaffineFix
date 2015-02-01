@@ -60,7 +60,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
             
             //Set shop distance
             if let distance = location.objectForKey("distance") as? Int{
-                if distance>1000{
+                if distance>=1000{
                     distanceLabel.text = String(format: "%.02f km",round(Float(distance)/50.0)/20)
                 }else{
                     distanceLabel.text = String(format:"%d m",Int(round(Float(distance)/50.0)*50))

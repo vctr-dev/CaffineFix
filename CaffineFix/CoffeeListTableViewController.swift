@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class CoffeeListTableViewController: UITableViewController {
+class CoffeeListTableViewController: UITableViewController,CLLocationManagerDelegate {
     let testLL = "-35.236944,149.068889"//TODO Remove when launch
     let exploreSection = "coffee"
     let venuePhotos = 1
@@ -16,11 +17,16 @@ class CoffeeListTableViewController: UITableViewController {
     let openNow = 0
 //    let resultLimit = Int.max
     var venueList:NSArray = NSArray()
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.locationManager.delegate=self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.locationManager.requestWhenInUseAuthorization()//Always Authorization required for detecting significant location changes. TODO Change this to Always Authorization when on phone testing
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -31,16 +37,41 @@ class CoffeeListTableViewController: UITableViewController {
     }
     
     func refresh(){
-        self.getLocation()
-    }
-    
-    func getLocation(){
         
-        self.didReceiveLocation()//Proxy stud
+        //TODO change from startUpdating to the below code to save battery. Simulator is not so good at testing significantCHanges
+        self.locationManager.distanceFilter = 500
+        self.locationManager.stopUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
+        //self.locationManager.stopMonitoringSignificantLocationChanges()
+        //self.locationManager.startMonitoringSignificantLocationChanges()
+        
+        //self.getLocation()
     }
     
-    func didReceiveLocation(){
-        self.getDataFromServer(testLL)
+//    func getLocation(){
+//        
+//        self.didReceiveLocation()//Proxy stud
+//    }
+//    
+//    func didReceiveLocation(){
+//        self.getDataFromServer(testLL)
+//    }
+    
+    // MARK: - Location manager delegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        if let location = locations.last as CLLocation?{
+            let coordinate = location.coordinate
+            self.getDataFromServer("\(coordinate.latitude),\(coordinate.longitude)")
+        }else{
+            self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println("\(__FUNCTION__): \(error)")
+        self.refreshControl?.endRefreshing()
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -105,7 +136,7 @@ class CoffeeListTableViewController: UITableViewController {
                 if refresher.refreshing{
                     messageLabel.text = "Refreshing..."
                 }else{
-                    messageLabel.text = "No data is currently available. Please pull down to refresh."
+                    messageLabel.text = "No data retrieved.\nPull down to try again."
                 }
             }
             messageLabel.textColor = UIColor.blackColor()
