@@ -9,6 +9,7 @@
 import Foundation
 
 class Venue {
+    var shopId: String = ""
     var shopName: String = ""
     var address: String = ""
     var distance: Int = 0
@@ -18,9 +19,14 @@ class Venue {
     var photoPrefix: String = ""
     var photoSuffix: String = ""
     var hasPhoto: Bool = false
+    var venueDict:NSDictionary?
     
     init(venue: NSDictionary){
+        venueDict = venue
         
+        if let venueId = venue.objectForKey("id") as? String{
+            shopId = venueId
+        }
         if let shopNameString = venue.objectForKey("name") as? String{
             shopName = shopNameString
         }

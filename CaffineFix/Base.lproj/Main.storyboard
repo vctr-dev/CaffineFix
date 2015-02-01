@@ -172,37 +172,7 @@ Second line of address</string>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="gZe-ci-kfK">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="ink-rH-4e2">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ink-rH-4e2" id="Sun-sO-5Bu">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="pVh-bc-yOW">
-                                                    <rect key="frame" x="8" y="8" width="65" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="pVh-bc-yOW" secondAttribute="height" multiplier="1:1" id="2Oc-jl-Eva"/>
-                                                        <constraint firstAttribute="height" constant="65" id="tFl-0c-yiL"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some tip by a user" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvb-88-RHu">
-                                                    <rect key="frame" x="81" y="8" width="145" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Mvb-88-RHu" firstAttribute="leading" secondItem="pVh-bc-yOW" secondAttribute="trailing" constant="8" id="12j-kC-tL0"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Mvb-88-RHu" secondAttribute="bottom" id="9cg-lU-8rx"/>
-                                                <constraint firstItem="pVh-bc-yOW" firstAttribute="top" secondItem="Sun-sO-5Bu" secondAttribute="topMargin" id="VGt-4H-dBs"/>
-                                                <constraint firstItem="pVh-bc-yOW" firstAttribute="leading" secondItem="Sun-sO-5Bu" secondAttribute="leadingMargin" id="dqk-rF-D2U"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pVh-bc-yOW" secondAttribute="bottom" id="fIp-8X-6mN"/>
-                                                <constraint firstItem="Mvb-88-RHu" firstAttribute="top" secondItem="Sun-sO-5Bu" secondAttribute="topMargin" id="g8L-wh-F69"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
+                                <cells/>
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="4uG-cd-Ryn">
                                 <cells>
@@ -256,12 +226,9 @@ Second line of address</string>
                     </tableView>
                     <connections>
                         <outlet property="addressLabel" destination="AAB-bJ-vGl" id="WQ2-rK-06A"/>
-                        <outlet property="callCell" destination="uDw-VQ-Cim" id="X3M-Sx-dUH"/>
+                        <outlet property="callCell" destination="uDw-VQ-Cim" id="5PH-wI-N2r"/>
                         <outlet property="featuredImage" destination="MTT-oI-Way" id="rsL-Wl-qAO"/>
-                        <outlet property="getDirectionsCell" destination="huF-u3-oss" id="j8t-lW-k4P"/>
                         <outlet property="phoneNumberLabel" destination="Raa-jI-hDa" id="CWv-n9-zzz"/>
-                        <outlet property="tipLabel" destination="Mvb-88-RHu" id="Rmc-eR-dTf"/>
-                        <outlet property="tipUserImage" destination="pVh-bc-yOW" id="AVC-X4-fvC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xA1-Ce-sAf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,7 +256,6 @@ Second line of address</string>
     </scenes>
     <resources>
         <image name="LargePlaceholderImage" width="300" height="60"/>
-        <image name="Person Placeholder" width="250" height="250"/>
         <image name="PlaceholderImage" width="300" height="300"/>
     </resources>
 </document>

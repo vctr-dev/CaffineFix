@@ -7,43 +7,123 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CoffeeDetailTableViewController: UITableViewController {
 
     @IBOutlet weak var featuredImage: UIImageView!
-    @IBOutlet weak var tipUserImage: UIImageView!
-    @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var getDirectionsCell: UIView!
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var callCell: UITableViewCell!
     
+    var venue:Venue?
+    var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var res = "500x100"
+    var phoneNumber = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        callCell.hidden = true
+        if let venueItem = venue{
+            //Set Name
+            self.navigationItem.title=venueItem.shopName
+            
+            //Set address
+            addressLabel.text = venueItem.address.stringByReplacingOccurrencesOfString("\n", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
+            //Set lat long
+            if let location = venueItem.venueDict!.objectForKey("location") as NSDictionary?{
+                coordinates.latitude = location.objectForKey("lat") as CLLocationDegrees
+                coordinates.longitude = location.objectForKey("lng") as CLLocationDegrees
+            }
+            
+            //Get image
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
+                let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.featuredImage.image = img
+                }
+            }
+            
+            //Get contact info request
+            self.getVenueDetail(venueItem)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func getVenueDetail(venueItem: Venue){
+        var urlString = "\(venueAPI)\(venueItem.shopId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)"
+        var url = NSURL(string: urlString)
+        var urlRequest = NSURLRequest(URL: url!)
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible=true
+        // Send url request on async
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible=false
+            
+            // If error, print error and escape
+            if urlResponse.isKindOfClass(NSHTTPURLResponse){
+                let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
+                if statusCode != 200{
+                    println("\(__FUNCTION__): sendAsynchronousRequest status code != 200: response = \(urlResponse)")
+                    return
+                }
+            }
+            
+            var error: NSError?
+            let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
+            if let dict = jsonDict{
+                self.extractPhoneNumberFromDict(dict)
+            }else{
+                //if jsonDict is nil means parsing has failed.
+                println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
+                return
+            }
+        })
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+    func extractPhoneNumberFromDict(dict:NSDictionary){
+        let responseDict = dict.objectForKey("response")! as NSDictionary
+        let venueDict = responseDict.objectForKey("venue")! as NSDictionary
+        if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
+            //Contact info exists
+            if let phoneNumber = contactDict.objectForKey("phone") as String?{
+                self.phoneNumber = phoneNumber
+                self.callCell.hidden = false
+                if let formattedNumber = contactDict.objectForKey("formattedPhone") as String?{
+                    phoneNumberLabel.text = formattedNumber
+                }else{
+                    phoneNumberLabel.text=""
+                }
+            }
+        }else{
+            //Contact info does not exist
+        }
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+    
+    //Set image
+    
+    //Set contact info
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return (indexPath.section == 2)
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 2{
+            switch(indexPath.row){
+            case 0:
+                //Get direction
+                UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?daddr=\(coordinates.latitude),\(coordinates.longitude)")!)
+                return
+            case 1:
+                if phoneNumber != ""{
+                    UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
+                }
+                return
+            default:
+                return
+            }
+        }
     }
 }

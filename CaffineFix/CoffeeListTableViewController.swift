@@ -21,8 +21,8 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.backBarButtonItem?.title=""
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -80,7 +80,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     func getDataFromServer(latLong:String){
         
         // Creating URL request
-        var urlString = "https://api.foursquare.com/v2/venues/explore?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
+        var urlString = "\(exploreAPI)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
         var url = NSURL(string: urlString)
         var urlRequest = NSURLRequest(URL: url!)
         
@@ -103,7 +103,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             var error: NSError?
             let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
             if let dict = jsonDict{
-                self.extractVenueListFromDict(dict, latLong: latLong)
+                self.extractVenueListFromDict(dict)
             }else{
                 //if jsonDict is nil means parsing has failed.
                 println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
@@ -112,7 +112,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         })
     }
     
-    func extractVenueListFromDict(dict:NSDictionary, latLong:String){
+    func extractVenueListFromDict(dict:NSDictionary){
         let responseDict = dict.objectForKey("response")! as NSDictionary
         let groupsArray = responseDict.objectForKey("groups")! as NSArray
         let groupsDict = groupsArray.firstObject as NSDictionary
@@ -135,7 +135,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             
             if let refresher = self.refreshControl?{
                 if refresher.refreshing{
-                    messageLabel.text = "Refreshing..."
+                    messageLabel.text = "Brewing..."
                 }else{
                     messageLabel.text = "No data retrieved.\nPull down to try again."
                 }
@@ -170,15 +170,18 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         return cell
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        let destVC = segue.destinationViewController as CoffeeDetailTableViewController
+        let selectedCellIndexPath = tableView.indexPathForSelectedRow()
+        let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as CoffeeEntryTableViewCell
+        destVC.venue = selectedCell.venue
+        
     }
-    */
-    
 
 }
