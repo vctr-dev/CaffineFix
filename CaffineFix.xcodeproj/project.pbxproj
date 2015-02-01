@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */; };
 		4EBD4D831A7C49CB002218A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */; };
 		4EBD4D881A7C49CB002218A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D861A7C49CB002218A2 /* Main.storyboard */; };
 		4EBD4D8A1A7C49CB002218A2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D891A7C49CB002218A2 /* Images.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4EBD4D7D1A7C49CB002218A2 /* CaffineFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffineFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBD4D811A7C49CB002218A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +101,7 @@
 		4EBD4D801A7C49CB002218A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */,
 				4EBD4D811A7C49CB002218A2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -415,6 +419,7 @@
 				4EBD4D9E1A7C49CC002218A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EBD4D9F1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffineFixTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +428,7 @@
 				4EBD4DA11A7C49CC002218A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
