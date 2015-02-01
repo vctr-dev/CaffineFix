@@ -37,7 +37,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.refresh()
         
     }
-    
+
     //Workaround as table cell height auto-layout is buggy when segue from cell
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -48,6 +48,9 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         super.viewWillDisappear(animated)
         self.tableView.reloadData()
     }
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
     
     func refresh(){
         self.locationManager.distanceFilter = 500 // Updates every 500m (good when going to new location)

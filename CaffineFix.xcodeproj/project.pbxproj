@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E14BF551A7E0E8D00D44D11 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E14BF541A7E0E8D00D44D11 /* Venue.swift */; };
+		4E377E4B1A7E3F820056B239 /* CoffeeDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */; };
 		4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */; };
 		4EBD4D831A7C49CB002218A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */; };
 		4EBD4D881A7C49CB002218A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D861A7C49CB002218A2 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		4E14BF541A7E0E8D00D44D11 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeDetailTableViewController.swift; sourceTree = "<group>"; };
 		4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4EBD4D7D1A7C49CB002218A2 /* CaffineFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffineFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBD4D811A7C49CB002218A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				4EBD4D861A7C49CB002218A2 /* Main.storyboard */,
 				4EBD4DA21A7C500E002218A2 /* CoffeeListTableViewController.swift */,
 				4EBD4DA41A7C7045002218A2 /* CoffeeEntryTableViewCell.swift */,
+				4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */,
 				4E14BF541A7E0E8D00D44D11 /* Venue.swift */,
 				4EBD4DA61A7C84DF002218A2 /* Constants.swift */,
 				4EBD4DA81A7CA8AC002218A2 /* MyPlayground.playground */,
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E377E4B1A7E3F820056B239 /* CoffeeDetailTableViewController.swift in Sources */,
 				4EBD4D831A7C49CB002218A2 /* AppDelegate.swift in Sources */,
 				4E14BF551A7E0E8D00D44D11 /* Venue.swift in Sources */,
 				4EBD4DA31A7C500E002218A2 /* CoffeeListTableViewController.swift in Sources */,
