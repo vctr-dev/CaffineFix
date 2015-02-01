@@ -30,14 +30,8 @@
                                             <rect key="frame" x="8" y="8" width="65" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="16M-l6-ddW" secondAttribute="height" multiplier="1:1" id="ahu-NU-lKg"/>
-                                                <constraint firstAttribute="height" constant="36" id="mHw-KJ-pno"/>
                                                 <constraint firstAttribute="height" constant="65" id="ykf-vN-poV"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="mHw-KJ-pno"/>
-                                                </mask>
-                                            </variation>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Restaurant Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVq-sv-vzW">
                                             <rect key="frame" x="81" y="8" width="134" height="30"/>
@@ -132,6 +126,7 @@ Second line of address</string>
                                     <outlet property="shopImage" destination="16M-l6-ddW" id="Vmb-V8-xFa"/>
                                     <outlet property="shopNameLabel" destination="uVq-sv-vzW" id="fWr-bc-Xdg"/>
                                     <outlet property="shopPriceLabel" destination="feK-A7-bVA" id="a7A-i4-F6A"/>
+                                    <segue destination="hwe-zR-cZE" kind="show" id="tDt-4c-Um7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -147,32 +142,12 @@ Second line of address</string>
             <point key="canvasLocation" x="1065" y="362"/>
         </scene>
         <!--Table View Controller-->
-        <scene sceneID="uNH-TM-kkA">
+        <scene sceneID="3Kf-SD-Zuv">
             <objects>
-                <tableViewController id="gbe-pR-6aM" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dnh-UG-C3y">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="loY-J1-UfH">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="loY-J1-UfH" id="HoL-Me-5mn">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gbe-pR-6aM" id="aih-Zg-4k8"/>
-                            <outlet property="delegate" destination="gbe-pR-6aM" id="KlZ-RE-crF"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gnc-qI-VFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sx0-Bs-jug" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="hwe-zR-cZE" sceneMemberID="viewController"/>
             </objects>
-            <point key="canvasLocation" x="1725" y="362"/>
+            <point key="canvasLocation" x="1701" y="368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QVV-30-Nii">

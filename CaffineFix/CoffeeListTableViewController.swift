@@ -22,6 +22,8 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.backBarButtonItem?.title=""
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.locationManager.delegate=self
@@ -34,6 +36,17 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.refreshControl?.beginRefreshing()
         self.refresh()
         
+    }
+    
+    //Workaround as table cell height auto-layout is buggy when segue from cell
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.reloadData()
     }
     
     func refresh(){

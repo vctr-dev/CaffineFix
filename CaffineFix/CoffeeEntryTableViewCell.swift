@@ -25,10 +25,11 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                 shopNameLabel.text = venueItem.shopName
                 shopAddressLabel.text=venueItem.address
                 
-                if venueItem.distance>=1000{
-                    distanceLabel.text = String(format: "%.02f km",round(Float(venueItem.distance)/50.0)/20)
+                let distance = Int(round(Float(venueItem.distance)/50.0)*50)
+                if distance>=1000{
+                    distanceLabel.text = String(format: "%.02f km",round(Float(distance)/50.0)/20)
                 }else{
-                    distanceLabel.text = String(format:"%d m",Int(round(Float(venueItem.distance)/50.0)*50))
+                    distanceLabel.text = String(format:"%d m",distance)
                 }
                 
                 if venueItem.priceRating>0{
