@@ -149,7 +149,8 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as CoffeeEntryTableViewCell
-        cell.venue = venueList.objectAtIndex(indexPath.row) as NSDictionary
+        let venue = Venue(venue: venueList.objectAtIndex(indexPath.row) as NSDictionary)
+        cell.venue = venue
         return cell
     }
 
