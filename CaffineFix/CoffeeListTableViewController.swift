@@ -26,7 +26,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         
         self.locationManager.delegate=self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager.requestWhenInUseAuthorization()//Always Authorization required for detecting significant location changes. TODO Change this to Always Authorization when on phone testing
+        self.locationManager.requestWhenInUseAuthorization()
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -37,25 +37,11 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     }
     
     func refresh(){
-        
-        //TODO change from startUpdating to the below code to save battery. Simulator is not so good at testing significantCHanges
-        self.locationManager.distanceFilter = 500
+        self.locationManager.distanceFilter = 500 // Updates every 500m (good when going to new location)
         self.locationManager.stopUpdatingLocation()
         self.locationManager.startUpdatingLocation()
-        //self.locationManager.stopMonitoringSignificantLocationChanges()
-        //self.locationManager.startMonitoringSignificantLocationChanges()
-        
-        //self.getLocation()
     }
     
-//    func getLocation(){
-//        
-//        self.didReceiveLocation()//Proxy stud
-//    }
-//    
-//    func didReceiveLocation(){
-//        self.getDataFromServer(testLL)
-//    }
     
     // MARK: - Location manager delegate
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -75,7 +61,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     }
 
     // MARK: - Table view data source
-    
     func getDataFromServer(latLong:String){
         
         // Creating URL request
