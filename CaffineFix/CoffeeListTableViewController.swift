@@ -15,10 +15,10 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     let venuePhotos = 1
     let sortByDistance = 1
     let openNow = 0
-//    let resultLimit = Int.max
+    //    let resultLimit = Int.max
     var venueList:NSArray = NSArray()
     let locationManager = CLLocationManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +37,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.refresh()
         
     }
-
+    
     //Workaround as table cell height auto-layout is buggy when segue from cell
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,7 +72,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
     }
-
+    
     //MARK: - Server Communication
     func exploreUrl(latLong:String) -> NSURL?{
         var urlString = "\(exploreAPI)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
@@ -129,7 +129,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             return NSArray()
         }
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
@@ -161,12 +161,11 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             return 1
         }
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return venueList.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as CoffeeEntryTableViewCell
@@ -175,19 +174,15 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         }
         return cell
     }
-
+    
     
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
         let destVC = segue.destinationViewController as CoffeeDetailTableViewController
         let selectedCellIndexPath = tableView.indexPathForSelectedRow()
         let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as CoffeeEntryTableViewCell
         destVC.venue = selectedCell.venue
-        
     }
-
+    
 }

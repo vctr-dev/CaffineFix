@@ -20,7 +20,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
     let thumbnailRes:NSInteger = 100
     var venue: Venue?{
         didSet{
-            //Set shop name
+            
             if let venueItem = venue{
                 shopNameLabel.text = venueItem.shopName
                 shopAddressLabel.text=venueItem.address
@@ -34,8 +34,10 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                 
                 if venueItem.priceRating>0{
                     shopPriceLabel.attributedText=NSAttributedString(string: "$$$$", attributes: [NSForegroundColorAttributeName:UIColor.grayColor(),NSFontAttributeName:UIFont.systemFontOfSize(shopPriceLabel.font.pointSize)])
+                    
                     let priceString = NSMutableAttributedString(attributedString: shopPriceLabel.attributedText)
                     priceString.setAttributes([NSForegroundColorAttributeName:UIColor.blackColor(),NSFontAttributeName:UIFont.boldSystemFontOfSize(shopPriceLabel.font.pointSize)], range: NSMakeRange(0, venueItem.priceRating))
+                    
                     shopPriceLabel.attributedText = priceString
                 }
                 
@@ -77,9 +79,6 @@ class CoffeeEntryTableViewCell: UITableViewCell {
         
         self.shopImage.image = UIImage(named: "PlaceholderImage")
         shopImage.layer.masksToBounds=true
-        
-        //square photo
-        //shopImage.layer.cornerRadius = 5.0
         
         //circular photo
         shopImage.layer.cornerRadius=shopImage.bounds.size.height/2

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class CoffeeDetailTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var featuredImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
@@ -18,13 +18,13 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     var venue:Venue?
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    var res = "500x300"
+    var res = "500x300" //Photo resolution of the featured photo to display
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         featuredImage.clipsToBounds = true
-
+        
         callCell.hidden = true
         if let venueItem = venue{
             //Set Name
@@ -32,17 +32,15 @@ class CoffeeDetailTableViewController: UITableViewController {
             
             //Set address
             addressLabel.text = venueItem.address.stringByReplacingOccurrencesOfString("\n", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            
-            //Set lat long
-            if let location = venueItem.venueDict!.objectForKey("location") as NSDictionary?{
-                coordinates.latitude = location.objectForKey("lat") as CLLocationDegrees
-                coordinates.longitude = location.objectForKey("lng") as CLLocationDegrees
-            }
-            
+           
             //Get image
             if venueItem.hasPhoto{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
+                    
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                     let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    
                     dispatch_async(dispatch_get_main_queue()) {
                         self.featuredImage.image = img
                     }
@@ -59,13 +57,8 @@ class CoffeeDetailTableViewController: UITableViewController {
         return NSURL(string: urlString)
     }
     
-    func venueUrlRequest(shopid:String)->NSURLRequest{
-        
-        return NSURLRequest(URL: venueUrl(shopid)!)
-    }
-    
     func getVenueDetail(venueItem: Venue){
-        let urlRequest = venueUrlRequest(venueItem.shopId)
+        let urlRequest = NSURLRequest(URL: venueUrl(venueItem.shopId)!)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
         // Send url request on async
@@ -81,11 +74,10 @@ class CoffeeDetailTableViewController: UITableViewController {
                     return
                 }
             }
-            
-            
-                self.extractPhoneNumberFromData(data)
+            self.extractPhoneNumberFromData(data)
         })
     }
+    
     func extractPhoneNumberFromData(data:NSData){
         var error: NSError?
         let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
@@ -107,20 +99,19 @@ class CoffeeDetailTableViewController: UITableViewController {
         }
     }
     
-    //Set image
-    
-    //Set contact info
-    
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return (indexPath.section == 2)
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 2{
             switch(indexPath.row){
             case 0:
                 //Get direction
-                UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?q=\(coordinates.latitude),\(coordinates.longitude)")!)
+                if let venueItem = venue{
+                    UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?q=\(venueItem.coordinates.latitude),\(venueItem.coordinates.longitude)")!)
+                }
                 return
             case 1:
                 if let venueItem = venue{
