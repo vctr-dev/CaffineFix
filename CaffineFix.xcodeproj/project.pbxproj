@@ -26,10 +26,6 @@
 		4ECAD4621A7F6DC300E67147 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4DA61A7C84DF002218A2 /* Constants.swift */; };
 		4ECAD4641A7F834700E67147 /* exploreResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD4631A7F834700E67147 /* exploreResultMocked */; };
 		4ECAD4661A7F85CC00E67147 /* exploreResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD4631A7F834700E67147 /* exploreResultMocked */; };
-		4ECAD4681A7F949B00E67147 /* venueWithoutContactResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD4671A7F949B00E67147 /* venueWithoutContactResultMocked */; };
-		4ECAD4691A7F949B00E67147 /* venueWithoutContactResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD4671A7F949B00E67147 /* venueWithoutContactResultMocked */; };
-		4ECAD46B1A7F955C00E67147 /* venueWithContactResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD46A1A7F955C00E67147 /* venueWithContactResultMocked */; };
-		4ECAD46C1A7F955C00E67147 /* venueWithContactResultMocked in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAD46A1A7F955C00E67147 /* venueWithContactResultMocked */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +55,6 @@
 		4EBD4DA41A7C7045002218A2 /* CoffeeEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeEntryTableViewCell.swift; sourceTree = "<group>"; };
 		4EBD4DA61A7C84DF002218A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4ECAD4631A7F834700E67147 /* exploreResultMocked */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = exploreResultMocked; sourceTree = "<group>"; };
-		4ECAD4671A7F949B00E67147 /* venueWithoutContactResultMocked */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venueWithoutContactResultMocked; sourceTree = "<group>"; };
-		4ECAD46A1A7F955C00E67147 /* venueWithContactResultMocked */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venueWithContactResultMocked; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				4EBD4D981A7C49CC002218A2 /* CaffineFixTests.swift */,
-				4ECAD4671A7F949B00E67147 /* venueWithoutContactResultMocked */,
-				4ECAD46A1A7F955C00E67147 /* venueWithContactResultMocked */,
 				4ECAD4631A7F834700E67147 /* exploreResultMocked */,
 				4EBD4D961A7C49CC002218A2 /* Supporting Files */,
 			);
@@ -228,10 +220,8 @@
 			files = (
 				4ECAD4661A7F85CC00E67147 /* exploreResultMocked in Resources */,
 				4EBD4D881A7C49CB002218A2 /* Main.storyboard in Resources */,
-				4ECAD46B1A7F955C00E67147 /* venueWithContactResultMocked in Resources */,
 				4EBD4D8D1A7C49CB002218A2 /* LaunchScreen.xib in Resources */,
 				4EBD4D8A1A7C49CB002218A2 /* Images.xcassets in Resources */,
-				4ECAD4681A7F949B00E67147 /* venueWithoutContactResultMocked in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,9 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECAD4691A7F949B00E67147 /* venueWithoutContactResultMocked in Resources */,
 				4ECAD4641A7F834700E67147 /* exploreResultMocked in Resources */,
-				4ECAD46C1A7F955C00E67147 /* venueWithContactResultMocked in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

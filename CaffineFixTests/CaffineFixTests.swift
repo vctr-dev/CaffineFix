@@ -15,17 +15,7 @@ class CaffineFixTests: XCTestCase {
     let mockVenueId = "4dd1a2d652b15d0acc6c89dd"
     let coffeeListTableViewController = CoffeeListTableViewController()
     let coffeeDetailTableViewController = CoffeeDetailTableViewController()
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    let mockExploreJsonFileName = "exploreResultMocked"
     
     func testInitializing(){
         XCTAssertNotNil(coffeeListTableViewController, "Coffee List Table View Controller did not load")
@@ -36,7 +26,9 @@ class CaffineFixTests: XCTestCase {
         if let url = coffeeListTableViewController.exploreUrl(mockLL){
             let urlRequest = NSURLRequest(URL: url)
             let expectation = expectationWithDescription("Get json for explore API with url: \(url)")
+            
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
+                
                 expectation.fulfill()
                 
                 XCTAssertNotNil(data, "data should not be nil")
@@ -56,6 +48,7 @@ class CaffineFixTests: XCTestCase {
             
             waitForExpectationsWithTimeout(60, handler: { error in
             })
+            
         }else{
             XCTFail("Explore URL fail to create")
         }
@@ -73,7 +66,7 @@ class CaffineFixTests: XCTestCase {
     
     func testExtractingVenuesFromJson(){
         //Using mock json, test if venue can be extracted properly using extractVenue function
-        if let json = getJsonDataFromFileName("exploreResultMocked"){
+        if let json = getJsonDataFromFileName(mockExploreJsonFileName){
             let venueList = coffeeListTableViewController.extractVenueListFromData(json)
             for venue in venueList{
                 XCTAssertNotNil(venue, "venue is nil")
@@ -86,9 +79,12 @@ class CaffineFixTests: XCTestCase {
     
     func testGetVenueInfoFromServer(){
         if let url = coffeeDetailTableViewController.venueUrl(mockVenueId){
+            
             let urlRequest = NSURLRequest(URL: url)
             let expectation = expectationWithDescription("Get json for venue API with url: \(url)")
+            
             NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
+             
                 expectation.fulfill()
                 
                 XCTAssertNotNil(data, "data should not be nil")
