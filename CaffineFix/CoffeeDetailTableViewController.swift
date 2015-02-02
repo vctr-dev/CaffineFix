@@ -19,7 +19,6 @@ class CoffeeDetailTableViewController: UITableViewController {
     var venue:Venue?
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var res = "500x300"
-    var phoneNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,33 +82,28 @@ class CoffeeDetailTableViewController: UITableViewController {
                 }
             }
             
-            var error: NSError?
-            let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
-            if let dict = jsonDict{
-                self.extractPhoneNumberFromDict(dict)
-            }else{
-                //if jsonDict is nil means parsing has failed.
-                println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
-                return
-            }
+            
+                self.extractPhoneNumberFromData(data)
         })
     }
-    func extractPhoneNumberFromDict(dict:NSDictionary){
-        let responseDict = dict.objectForKey("response")! as NSDictionary
-        let venueDict = responseDict.objectForKey("venue")! as NSDictionary
-        if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
-            //Contact info exists
-            if let phoneNumber = contactDict.objectForKey("phone") as String?{
-                self.phoneNumber = phoneNumber
-                self.callCell.hidden = false
-                if let formattedNumber = contactDict.objectForKey("formattedPhone") as String?{
-                    phoneNumberLabel.text = formattedNumber
-                }else{
-                    phoneNumberLabel.text=""
+    func extractPhoneNumberFromData(data:NSData){
+        var error: NSError?
+        let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
+        if let dict = jsonDict{
+            if let venueItem = venue{
+                venueItem.venueDetailDict = dict
+                if venueItem.hasPhoneNumber{
+                    self.callCell.hidden = false
+                    if venueItem.formattedNumber==""{
+                        phoneNumberLabel.text = venueItem.phoneNumber
+                    }else{
+                        phoneNumberLabel.text = venueItem.formattedNumber
+                    }
                 }
             }
         }else{
-            //Contact info does not exist
+            //if jsonDict is nil means parsing has failed.
+            println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
         }
     }
     
@@ -129,8 +123,10 @@ class CoffeeDetailTableViewController: UITableViewController {
                 UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?q=\(coordinates.latitude),\(coordinates.longitude)")!)
                 return
             case 1:
-                if phoneNumber != ""{
-                    UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
+                if let venueItem = venue{
+                    if venueItem.hasPhoneNumber{
+                        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(venueItem.phoneNumber)")!)
+                    }
                 }
                 return
             default:

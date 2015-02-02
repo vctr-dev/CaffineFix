@@ -11,14 +11,10 @@ import XCTest
 import CaffineFix
 
 class CaffineFixTests: XCTestCase {
-    let testLL = "37.33240905,-122.03051211"
-    // Can create 
-    let shopidWithPic = "4bf58dd8d48988d1e0931735"
-    let shopidWithoutPic = "4f4eb369e4b0e52480690902"
-    let shopidWithContact = "4e4dd3f8bd41b76bef93cbf0"
-    let shopidWithoutContact = "4dd1a2d652b15d0acc6c89dd"
-    
+    let mockLL = "37.33240905,-122.03051211"
+    let mockVenueId = "4dd1a2d652b15d0acc6c89dd"
     let coffeeListTableViewController = CoffeeListTableViewController()
+    let coffeeDetailTableViewController = CoffeeDetailTableViewController()
     
     override func setUp() {
         super.setUp()
@@ -33,31 +29,88 @@ class CaffineFixTests: XCTestCase {
     
     func testInitializing(){
         XCTAssertNotNil(coffeeListTableViewController, "Coffee List Table View Controller did not load")
+        XCTAssertNotNil(coffeeListTableViewController, "Coffee Detail Table View Controller did not load")
     }
     
     func testGettingVenuesFromServer(){
-        XCTAssertNotNil(coffeeListTableViewController.exploreUrl(testLL), "Explore URL fail to create")
+        if let url = coffeeListTableViewController.exploreUrl(mockLL){
+            let urlRequest = NSURLRequest(URL: url)
+            let expectation = expectationWithDescription("Get json for explore API with url: \(url)")
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
+                expectation.fulfill()
+                
+                XCTAssertNotNil(data, "data should not be nil")
+                XCTAssertNil(error, "error should be nil")
+                
+                if let response = urlResponse as? NSHTTPURLResponse {
+                    XCTAssertEqual(response.statusCode, 200, "HTTP response status code should be 200")
+                    XCTAssertEqual(response.MIMEType!, "application/json", "HTTP response content type should be application/json")
+                } else {
+                    XCTFail("Response was not NSHTTPURLResponse")
+                }
+                
+                var error: NSError?
+                let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
+                XCTAssertNotNil(jsonDict, "\(__FUNCTION__): JSONObjectWithData error: \(error)")
+            })
+            
+            waitForExpectationsWithTimeout(60, handler: { error in
+            })
+        }else{
+            XCTFail("Explore URL fail to create")
+        }
         
+    }
+    
+    func getJsonDataFromFileName(fileName:String)->NSData?{
+        let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "")
+        if let jsonPath = path {
+            let mockJson = NSData(contentsOfFile: jsonPath)
+            return mockJson
+        }
+        return nil
     }
     
     func testExtractingVenuesFromJson(){
         //Using mock json, test if venue can be extracted properly using extractVenue function
-    }
-    
-    func testDisplayVenueInCoffeeEntryTableViewCell(){
-        //Using mock venues, test if cells display correctly
+        if let json = getJsonDataFromFileName("exploreResultMocked"){
+            let venueList = coffeeListTableViewController.extractVenueListFromData(json)
+            for venue in venueList{
+                XCTAssertNotNil(venue, "venue is nil")
+                XCTAssertTrue(venue.isKindOfClass(Venue), "venue is not a kind of Venue")
+            }
+        }else{
+            XCTFail("Mock Json file not read")
+        }
     }
     
     func testGetVenueInfoFromServer(){
-        //test if url is created correctly
-        //test if venue is retrieved from server
+        if let url = coffeeDetailTableViewController.venueUrl(mockVenueId){
+            let urlRequest = NSURLRequest(URL: url)
+            let expectation = expectationWithDescription("Get json for venue API with url: \(url)")
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
+                expectation.fulfill()
+                
+                XCTAssertNotNil(data, "data should not be nil")
+                XCTAssertNil(error, "error should be nil")
+                
+                if let response = urlResponse as? NSHTTPURLResponse {
+                    XCTAssertEqual(response.statusCode, 200, "HTTP response status code should be 200")
+                    XCTAssertEqual(response.MIMEType!, "application/json", "HTTP response content type should be application/json")
+                } else {
+                    XCTFail("Response was not NSHTTPURLResponse")
+                }
+                
+                var error: NSError?
+                let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
+                XCTAssertNotNil(jsonDict, "\(__FUNCTION__): JSONObjectWithData error: \(error)")
+            })
+            
+            waitForExpectationsWithTimeout(60, handler: { error in
+            })
+        }else{
+            XCTFail("Venue URL fail to create")
+        }
     }
     
-    func testExtractContactDetailsFromJson(){
-        //using mock json, test if retrieve contact details
-    }
-    
-    func testDisplayVenueDetailInCoffeeDetailTableViewController(){
-        //Using mock venues, test if venues are displayed correctly.
-    }
 }

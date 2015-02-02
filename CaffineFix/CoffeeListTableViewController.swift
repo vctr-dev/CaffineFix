@@ -48,9 +48,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         super.viewWillDisappear(animated)
         self.tableView.reloadData()
     }
-//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
     
     func refresh(){
         self.locationManager.distanceFilter = 500 // Updates every 500m (good when going to new location)
@@ -82,16 +79,13 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         return NSURL(string: urlString)
     }
     
-    func exploreUrlRequest(latLong:String) -> NSURLRequest{
-        
-        return NSURLRequest(URL: exploreUrl(latLong)!)
-    }
     func getDataFromServer(latLong:String){
         
         // Creating URL request
-        let urlRequest = exploreUrlRequest(latLong)
+        let urlRequest = NSURLRequest(URL: exploreUrl(latLong)!)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
+        
         // Send url request on async
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
             
@@ -107,31 +101,33 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
                 }
             }
             
-            var error: NSError?
-            let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
-            if let dict = jsonDict{
-                self.extractVenueListFromDict(dict)
-            }else{
-                //if jsonDict is nil means parsing has failed.
-                println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
-                return
-            }
+            self.extractVenueListFromData(data)
         })
     }
     
-    func extractVenueListFromDict(dict:NSDictionary) -> NSArray{
-        let responseDict = dict.objectForKey("response")! as NSDictionary
-        let groupsArray = responseDict.objectForKey("groups")! as NSArray
-        let groupsDict = groupsArray.firstObject as NSDictionary
-        let resultList = groupsDict.objectForKey("items")! as NSArray
-        
-        //Extracting out the venues array from the list and put into new array
-        venueList = NSArray()
-        for result in resultList{
-            venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as NSDictionary))
+    func extractVenueListFromData(data:NSData) -> NSArray{
+        var error: NSError?
+        let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
+        if let dict = jsonDict{
+            
+            let responseDict = dict.objectForKey("response")! as NSDictionary
+            let groupsArray = responseDict.objectForKey("groups")! as NSArray
+            let groupsDict = groupsArray.firstObject as NSDictionary
+            let resultList = groupsDict.objectForKey("items")! as NSArray
+            
+            //Extracting out the venues array from the list and put into new array
+            venueList = NSArray()
+            for result in resultList{
+                venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as NSDictionary))
+            }
+            self.tableView.reloadData()
+            return venueList
+            
+        }else{
+            //if jsonDict is nil means parsing has failed.
+            println("\(__FUNCTION__): JSONObjectWithData error: \(error)")
+            return NSArray()
         }
-        self.tableView.reloadData()
-        return venueList
     }
 
     // MARK: - Table view data source
@@ -149,6 +145,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
                     messageLabel.text = "No data retrieved.\nPull down to try again."
                 }
             }
+            
             messageLabel.textColor = UIColor.blackColor()
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = NSTextAlignment.Center
@@ -156,10 +153,9 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             messageLabel.sizeToFit()
             
             self.tableView.backgroundView = messageLabel;
-            
             self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
-            
             return 0
+            
         }else{
             self.tableView.separatorStyle=UITableViewCellSeparatorStyle.SingleLine
             return 1
