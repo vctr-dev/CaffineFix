@@ -41,10 +41,12 @@ class CoffeeDetailTableViewController: UITableViewController {
             }
             
             //Get image
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
-                let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.featuredImage.image = img
+            if venueItem.hasPhoto{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
+                    let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.featuredImage.image = img
+                    }
                 }
             }
             
@@ -53,10 +55,18 @@ class CoffeeDetailTableViewController: UITableViewController {
         }
     }
     
+    func venueUrl(shopid:String)->NSURL?{
+        var urlString = "\(venueAPI)\(shopid)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)"
+        return NSURL(string: urlString)
+    }
+    
+    func venueUrlRequest(shopid:String)->NSURLRequest{
+        
+        return NSURLRequest(URL: venueUrl(shopid)!)
+    }
+    
     func getVenueDetail(venueItem: Venue){
-        var urlString = "\(venueAPI)\(venueItem.shopId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)"
-        var url = NSURL(string: urlString)
-        var urlRequest = NSURLRequest(URL: url!)
+        let urlRequest = venueUrlRequest(venueItem.shopId)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
         // Send url request on async

@@ -76,13 +76,20 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.tableView.reloadData()
     }
 
-    // MARK: - Table view data source
+    //MARK: - Server Communication
+    func exploreUrl(latLong:String) -> NSURL?{
+        var urlString = "\(exploreAPI)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
+        return NSURL(string: urlString)
+    }
+    
+    func exploreUrlRequest(latLong:String) -> NSURLRequest{
+        
+        return NSURLRequest(URL: exploreUrl(latLong)!)
+    }
     func getDataFromServer(latLong:String){
         
         // Creating URL request
-        var urlString = "\(exploreAPI)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(version)&m=\(method)&ll=\(latLong)&section=\(exploreSection)&venuePhotos=\(venuePhotos)&sortByDistance=\(sortByDistance)&openNow=\(openNow)"
-        var url = NSURL(string: urlString)
-        var urlRequest = NSURLRequest(URL: url!)
+        let urlRequest = exploreUrlRequest(latLong)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
         // Send url request on async
@@ -112,7 +119,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         })
     }
     
-    func extractVenueListFromDict(dict:NSDictionary){
+    func extractVenueListFromDict(dict:NSDictionary) -> NSArray{
         let responseDict = dict.objectForKey("response")! as NSDictionary
         let groupsArray = responseDict.objectForKey("groups")! as NSArray
         let groupsDict = groupsArray.firstObject as NSDictionary
@@ -121,11 +128,13 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         //Extracting out the venues array from the list and put into new array
         venueList = NSArray()
         for result in resultList{
-            venueList = venueList.arrayByAddingObject(result.objectForKey("venue")!)
+            venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as NSDictionary))
         }
         self.tableView.reloadData()
+        return venueList
     }
 
+    // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
         if venueList.count == 0{
@@ -165,8 +174,9 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as CoffeeEntryTableViewCell
-        let venue = Venue(venue: venueList.objectAtIndex(indexPath.row) as NSDictionary)
-        cell.venue = venue
+        if let venueItem = venueList.objectAtIndex(indexPath.row) as? Venue{
+            cell.venue = venueItem
+        }
         return cell
     }
 
