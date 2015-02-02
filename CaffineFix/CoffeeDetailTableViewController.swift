@@ -116,7 +116,7 @@ class CoffeeDetailTableViewController: UITableViewController {
             switch(indexPath.row){
             case 0:
                 //Get direction
-                UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?daddr=\(coordinates.latitude),\(coordinates.longitude)")!)
+                UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?q=\(coordinates.latitude),\(coordinates.longitude)")!)
                 return
             case 1:
                 if phoneNumber != ""{
