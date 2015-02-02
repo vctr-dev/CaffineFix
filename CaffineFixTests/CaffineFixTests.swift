@@ -108,5 +108,4 @@ class CaffineFixTests: XCTestCase {
             XCTFail("Venue URL fail to create")
         }
     }
-    
 }
