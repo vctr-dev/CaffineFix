@@ -66,11 +66,9 @@ class CoffeeDetailTableViewController: UITableViewController {
         
         let session = NSURLSession.sharedSession()
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
-        
         // Send url request on async
         session.dataTaskWithURL(venueUrl(venueItem.shopId)!, completionHandler: {data, urlResponse, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible=false
-            
             // If error, print error and escape
             if urlResponse.isKindOfClass(NSHTTPURLResponse){
                 let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
@@ -90,12 +88,14 @@ class CoffeeDetailTableViewController: UITableViewController {
             if let venueItem = venue{
                 venueItem.venueDetailDict = dict
                 if venueItem.hasPhoneNumber{
-                    callCell.hidden = false
-                    if venueItem.formattedNumber==""{
-                        phoneNumberLabel.text = venueItem.phoneNumber
-                    }else{
-                        phoneNumberLabel.text = venueItem.formattedNumber
-                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.callCell.hidden = false
+                        if venueItem.formattedNumber==""{
+                            self.callCell.detailTextLabel!.text = venueItem.phoneNumber
+                        }else{
+                            self.callCell.detailTextLabel!.text = venueItem.formattedNumber
+                        }
+                    })
                 }
             }
         }else{
