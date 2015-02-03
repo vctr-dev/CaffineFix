@@ -45,7 +45,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         
         self.refreshControl?.beginRefreshing()
         self.refresh()
-        
     }
     
     func refresh(){
@@ -185,6 +184,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         let selectedCellIndexPath = tableView.indexPathForSelectedRow()
         let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as CoffeeEntryTableViewCell
         destVC.venue = selectedCell.venue
+        self.tableView.deselectRowAtIndexPath(selectedCellIndexPath!, animated: true)
     }
     
 }
