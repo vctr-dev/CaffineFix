@@ -20,12 +20,17 @@ class Venue {
     
     var isOpen: Bool = false
     var openStatus: String = ""
-    
-    var photoPrefix: String = ""
-    var photoSuffix: String = ""
-    var hasPhoto: Bool {
-        return (photoPrefix != "" && photoSuffix != "")
+
+    enum Photo{
+        case None
+        case Present(prefix: String,suffix: String)
     }
+    var photo: Photo = .None
+//    var photoPrefix: String = ""
+//    var photoSuffix: String = ""
+//    var hasPhoto: Bool {
+//        return (photoPrefix != "" && photoSuffix != "")
+//    }
     
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
@@ -94,14 +99,13 @@ class Venue {
         
         //Set Photo URL
         
-        if let photo = venue.objectForKey("featuredPhotos") as NSDictionary? {
+        if let photoItem = venue.objectForKey("featuredPhotos") as NSDictionary? {
             //Has Photo
-            if let itemsArray = photo.objectForKey("items") as NSArray?{
+            if let itemsArray = photoItem.objectForKey("items") as NSArray?{
                 let itemsDict = itemsArray.firstObject as NSDictionary?
                 if let photoUrlPrefix = itemsDict?.objectForKey("prefix") as? String{
                     if let photoUrlSuffix = itemsDict?.objectForKey("suffix") as? String{
-                        photoPrefix = photoUrlPrefix
-                        photoSuffix = photoUrlSuffix
+                        photo = Photo.Present(prefix:photoUrlPrefix,suffix:photoUrlSuffix)
                     }
                 }
             }

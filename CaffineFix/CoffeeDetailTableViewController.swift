@@ -35,17 +35,20 @@ class CoffeeDetailTableViewController: UITableViewController {
             addressLabel.text = venueItem.address.stringByReplacingOccurrencesOfString("\n", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
            
             //Get image
-            if venueItem.hasPhoto{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
-                    
+            switch venueItem.photo{
+            case .Present(let photoPrefix, let photoSuffix):
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)){
+                    //Getting image in background
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                    let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
+                    let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(photoPrefix)\(self.res)\(photoSuffix)")!)!)
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(dispatch_get_main_queue()){
                         self.featuredImage.image = img
                     }
                 }
+            default:
+                break
             }
             
             //Get contact info request
