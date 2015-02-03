@@ -13,7 +13,7 @@ An app to get the locations of nearby coffee places
 ## Features
 - Shows list of coffee shops nearby
 - Sort the list of coffee shops according to distance
-- If state of coffee shop (opened, closed, open until... or closed until...) is available, display in red (for closed) or green (for open) the state of the coffee shop
+- If state of coffee shop (*open*, *closed*, *open until...* or *closed until...*) is available, display the state of the coffee shop in color (red for closed, green for open) 
 - Shows price ratings (if available)
 - Call coffee shop (if contact info is available) or view the coffee shop in Apple Maps app
 
