@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E091EA61A80A508004F4CEA /* Jibber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E091EA51A80A508004F4CEA /* Jibber.framework */; };
 		4E14BF551A7E0E8D00D44D11 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E14BF541A7E0E8D00D44D11 /* Venue.swift */; };
 		4E377E4B1A7E3F820056B239 /* CoffeeDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */; };
 		4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E091EA51A80A508004F4CEA /* Jibber.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Jibber.framework; sourceTree = "<group>"; };
 		4E14BF541A7E0E8D00D44D11 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeDetailTableViewController.swift; sourceTree = "<group>"; };
 		4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E091EA61A80A508004F4CEA /* Jibber.framework in Frameworks */,
 				4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +117,7 @@
 		4EBD4D801A7C49CB002218A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E091EA51A80A508004F4CEA /* Jibber.framework */,
 				4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */,
 				4EBD4D811A7C49CB002218A2 /* Info.plist */,
 			);
@@ -374,6 +378,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CaffineFix",
+				);
 				INFOPLIST_FILE = CaffineFix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -384,6 +392,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CaffineFix",
+				);
 				INFOPLIST_FILE = CaffineFix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
