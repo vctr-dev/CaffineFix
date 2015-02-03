@@ -24,5 +24,6 @@ An app to get the locations of nearby coffee places
 - Foursquare API response will maintain JSON structure for the version as on 30/1/2015
 
 ## Other Comments
-- There is an Apple bug in table view cell - table view cell height resets to default when presenting view controller from table view. This only happens when table view cell height is set as automatic and vertical layout constraints are set for the table view cell. To workaround the bug, I call `tableView.reloadData()` when `viewWillAppear()` and `viewWillDisappear()` are called.
+- There is an Apple bug in table view cell - table view cell height resets to default when presenting view controller from table view. This only happens when table view cell height is set as automatic and vertical layout constraints are set for the table view cell. To workaround the bug, I set `self.tableView.estimatedRowHeight = 88` in `viewDidLoad` for CoffeeListTableViewController
 - Distances are rounded to the nearest 50 m for visual appeal.
+- For the app to get location in iOS Simulator, in iOS Simulator select Debug->Location and choose a location.

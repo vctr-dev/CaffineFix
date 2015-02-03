@@ -28,6 +28,9 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         //Flexible row height so that cell contents can be displayed correclt. AutoLayout constraints for cell's bottom margin are in place, relative to the items at the bottom of the row.
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
+        //Workaround as table cell height auto-layout is buggy when segue from cell
+        self.tableView.estimatedRowHeight = 88
+        
         self.locationManager.delegate=self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
@@ -43,17 +46,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         self.refreshControl?.beginRefreshing()
         self.refresh()
         
-    }
-    
-    //Workaround as table cell height auto-layout is buggy when segue from cell
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tableView.reloadData()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tableView.reloadData()
     }
     
     func refresh(){
