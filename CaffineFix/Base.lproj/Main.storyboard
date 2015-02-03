@@ -228,7 +228,6 @@ Second line of address</string>
                         <outlet property="addressLabel" destination="AAB-bJ-vGl" id="WQ2-rK-06A"/>
                         <outlet property="callCell" destination="uDw-VQ-Cim" id="5PH-wI-N2r"/>
                         <outlet property="featuredImage" destination="MTT-oI-Way" id="rsL-Wl-qAO"/>
-                        <outlet property="phoneNumberLabel" destination="Raa-jI-hDa" id="CWv-n9-zzz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xA1-Ce-sAf" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -13,7 +13,6 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var featuredImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var callCell: UITableViewCell!
     
     var venue:Venue?
@@ -26,7 +25,8 @@ class CoffeeDetailTableViewController: UITableViewController {
         featuredImage.clipsToBounds = true
         
         //Call cell is hidden until the phone number is found
-        callCell.hidden = true
+        callCell.textLabel!.text = "Getting Contact Info..."
+        callCell.detailTextLabel!.text = "Please wait a moment."
         if let venueItem = venue{
             //Set Name
             navigationItem.title=venueItem.shopName
@@ -87,16 +87,22 @@ class CoffeeDetailTableViewController: UITableViewController {
         if let dict = jsonDict{
             if let venueItem = venue{
                 venueItem.venueDetailDict = dict
-                if venueItem.hasPhoneNumber{
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.callCell.hidden = false
-                        if venueItem.formattedNumber==""{
-                            self.callCell.detailTextLabel!.text = venueItem.phoneNumber
+                
+                //UI activity must be held on the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    switch(venueItem.contact){
+                    case .None:
+                        self.callCell.textLabel!.text = "No Contact Info Retrieved"
+                        self.callCell.detailTextLabel!.text = ""
+                    case .Present(let phoneNumber, let formattedNumber):
+                        self.callCell.textLabel!.text = "Call Shop"
+                        if formattedNumber==""{
+                            self.callCell.detailTextLabel!.text = phoneNumber
                         }else{
-                            self.callCell.detailTextLabel!.text = venueItem.formattedNumber
+                            self.callCell.detailTextLabel!.text = formattedNumber
                         }
-                    })
-                }
+                    }
+                })
             }
         }else{
             //if jsonDict is nil means parsing has failed.
@@ -122,8 +128,11 @@ class CoffeeDetailTableViewController: UITableViewController {
             case 1:
                 //Make a call if there is a phone number
                 if let venueItem = venue{
-                    if venueItem.hasPhoneNumber{
-                        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(venueItem.phoneNumber)")!)
+                    switch(venueItem.contact){
+                    case .None:
+                        break
+                    case .Present(let phoneNumber, let formattedPhoneNumber):
+                        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
                     }
                 }
                 return

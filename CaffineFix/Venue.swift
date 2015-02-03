@@ -26,19 +26,14 @@ class Venue {
         case Present(prefix: String,suffix: String)
     }
     var photo: Photo = .None
-//    var photoPrefix: String = ""
-//    var photoSuffix: String = ""
-//    var hasPhoto: Bool {
-//        return (photoPrefix != "" && photoSuffix != "")
-//    }
     
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
-    var phoneNumber = ""
-    var formattedNumber = ""
-    var hasPhoneNumber:Bool{
-        return phoneNumber != ""
+    enum Contact{
+        case None
+        case Present(phoneNumber:String, formattedPhoneNumber:String)
     }
+    var contact:Contact = .None
     
     var venueDict:NSDictionary?
     var venueDetailDict:NSDictionary?{
@@ -50,9 +45,10 @@ class Venue {
                 if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
                     //Contact info exists
                     if let number = contactDict.objectForKey("phone") as String?{
-                        phoneNumber = number
                         if let fNumber = contactDict.objectForKey("formattedPhone") as String?{
-                            formattedNumber = fNumber
+                            contact = .Present(phoneNumber:number,formattedPhoneNumber:fNumber)
+                        }else{
+                            contact = .Present(phoneNumber:number,formattedPhoneNumber:"")
                         }
                     }
                 }
