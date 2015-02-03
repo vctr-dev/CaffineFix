@@ -17,14 +17,15 @@ class CoffeeDetailTableViewController: UITableViewController {
     @IBOutlet weak var callCell: UITableViewCell!
     
     var venue:Venue?
-    var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var res = "500x300" //Photo resolution of the featured photo to display
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Else the image view may be displayed out of the table cell view
         featuredImage.clipsToBounds = true
         
+        //Call cell is hidden until the phone number is found
         callCell.hidden = true
         if let venueItem = venue{
             //Set Name
@@ -57,6 +58,7 @@ class CoffeeDetailTableViewController: UITableViewController {
         return NSURL(string: urlString)
     }
     
+    //Get the contact details (if any) from server
     func getVenueDetail(venueItem: Venue){
         let urlRequest = NSURLRequest(URL: venueUrl(venueItem.shopId)!)
         
@@ -100,6 +102,7 @@ class CoffeeDetailTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        //Only highlight actionable cells (in section 2)
         return (indexPath.section == 2)
     }
     
@@ -108,12 +111,13 @@ class CoffeeDetailTableViewController: UITableViewController {
         if indexPath.section == 2{
             switch(indexPath.row){
             case 0:
-                //Get direction
+                //Open the location in maps
                 if let venueItem = venue{
                     UIApplication.sharedApplication().openURL(NSURL(string:"http://maps.apple.com/?q=\(venueItem.coordinates.latitude),\(venueItem.coordinates.longitude)")!)
                 }
                 return
             case 1:
+                //Make a call if there is a phone number
                 if let venueItem = venue{
                     if venueItem.hasPhoneNumber{
                         UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(venueItem.phoneNumber)")!)

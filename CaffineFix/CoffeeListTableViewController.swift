@@ -22,14 +22,21 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Let the back button title be empty to maximize the space on navigation bar on any pushed view controller
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         
+        //Flexible row height so that cell contents can be displayed correclt. AutoLayout constraints for cell's bottom margin are in place, relative to the items at the bottom of the row.
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.locationManager.delegate=self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager.requestWhenInUseAuthorization()
         
+        //Required for using location within app. Updated for iOS 8. Message to be displayed in info.plist
+        if self.locationManager.respondsToSelector("requestWhenInUseAuthorization"){
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        //Pull to refresh control
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         
@@ -50,7 +57,10 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     }
     
     func refresh(){
-        self.locationManager.distanceFilter = 500 // Updates every 500m (good when going to new location)
+        // Updates every 500m (good when going to new location)
+        self.locationManager.distanceFilter = 500
+        
+        //Gets the current location and send the current location to delegate
         self.locationManager.stopUpdatingLocation()
         self.locationManager.startUpdatingLocation()
     }
@@ -58,6 +68,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     
     // MARK: - Location manager delegate
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        //Handles location retrieved by location manager
         if let location = locations.last as CLLocation?{
             let coordinate = location.coordinate
             self.getDataFromServer("\(coordinate.latitude),\(coordinate.longitude)")
@@ -80,7 +91,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     }
     
     func getDataFromServer(latLong:String){
-        
         // Creating URL request
         let urlRequest = NSURLRequest(URL: exploreUrl(latLong)!)
         
@@ -100,7 +110,6 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
                     return
                 }
             }
-            
             self.extractVenueListFromData(data)
         })
     }
@@ -109,7 +118,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         var error: NSError?
         let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
         if let dict = jsonDict{
-            
+            //Venue items are in response -> groups -> items
             let responseDict = dict.objectForKey("response")! as NSDictionary
             let groupsArray = responseDict.objectForKey("groups")! as NSArray
             let groupsDict = groupsArray.firstObject as NSDictionary
@@ -179,6 +188,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //Pass the right venue to the destination view controller
         let destVC = segue.destinationViewController as CoffeeDetailTableViewController
         let selectedCellIndexPath = tableView.indexPathForSelectedRow()
         let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as CoffeeEntryTableViewCell

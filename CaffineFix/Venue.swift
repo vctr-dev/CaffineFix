@@ -5,6 +5,7 @@
 //  Created by Victor Chan on 1/2/15.
 //  Copyright (c) 2015 Spark Plug Studio. All rights reserved.
 //
+// Json serialized data gets interpretted to venue details
 
 import Foundation
 import CoreLocation
@@ -38,6 +39,7 @@ class Venue {
     var venueDetailDict:NSDictionary?{
         didSet{
             if let dict = venueDetailDict{
+                //Contact info is in response -> venue -> contact
                 let responseDict = dict.objectForKey("response")! as NSDictionary
                 let venueDict = responseDict.objectForKey("venue")! as NSDictionary
                 if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
