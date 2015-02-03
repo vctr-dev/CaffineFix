@@ -86,7 +86,7 @@ class CoffeeEntryTableViewCell: UITableViewCell {
         
         shopPriceLabel.attributedText=NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor.grayColor(),NSFontAttributeName:UIFont.systemFontOfSize(shopPriceLabel.font.pointSize)])
         
-        self.shopImage.image = UIImage(named: "PlaceholderImage")
+        shopImage.image = UIImage(named: "PlaceholderImage")
         shopImage.layer.masksToBounds=true
         
         //circular photo frame

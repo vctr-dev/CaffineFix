@@ -29,7 +29,7 @@ class CoffeeDetailTableViewController: UITableViewController {
         callCell.hidden = true
         if let venueItem = venue{
             //Set Name
-            self.navigationItem.title=venueItem.shopName
+            navigationItem.title=venueItem.shopName
             
             //Set address
             addressLabel.text = venueItem.address.stringByReplacingOccurrencesOfString("\n", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -49,7 +49,7 @@ class CoffeeDetailTableViewController: UITableViewController {
             }
             
             //Get contact info request
-            self.getVenueDetail(venueItem)
+            getVenueDetail(venueItem)
         }
     }
     
@@ -87,7 +87,7 @@ class CoffeeDetailTableViewController: UITableViewController {
             if let venueItem = venue{
                 venueItem.venueDetailDict = dict
                 if venueItem.hasPhoneNumber{
-                    self.callCell.hidden = false
+                    callCell.hidden = false
                     if venueItem.formattedNumber==""{
                         phoneNumberLabel.text = venueItem.phoneNumber
                     }else{

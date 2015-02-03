@@ -23,37 +23,37 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         super.viewDidLoad()
         
         //Let the back button title be empty to maximize the space on navigation bar on any pushed view controller
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         
         //Flexible row height so that cell contents can be displayed correclt. AutoLayout constraints for cell's bottom margin are in place, relative to the items at the bottom of the row.
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         //Workaround as table cell height auto-layout is buggy when segue from cell
-        self.tableView.estimatedRowHeight = 88
+        tableView.estimatedRowHeight = 88
         
-        self.locationManager.delegate=self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.delegate=self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         //Required for using location within app. Updated for iOS 8. Message to be displayed in info.plist
-        if self.locationManager.respondsToSelector("requestWhenInUseAuthorization"){
-            self.locationManager.requestWhenInUseAuthorization()
+        if locationManager.respondsToSelector("requestWhenInUseAuthorization"){
+            locationManager.requestWhenInUseAuthorization()
         }
         
         //Pull to refresh control
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
         
-        self.refreshControl?.beginRefreshing()
-        self.refresh()
+        refreshControl?.beginRefreshing()
+        refresh()
     }
     
     func refresh(){
         // Updates every 500m (good when going to new location)
-        self.locationManager.distanceFilter = 500
+        locationManager.distanceFilter = 500
         
         //Gets the current location and send the current location to delegate
-        self.locationManager.stopUpdatingLocation()
-        self.locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
     
@@ -62,17 +62,17 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         //Handles location retrieved by location manager
         if let location = locations.last as CLLocation?{
             let coordinate = location.coordinate
-            self.getDataFromServer("\(coordinate.latitude),\(coordinate.longitude)")
+            getDataFromServer("\(coordinate.latitude),\(coordinate.longitude)")
         }else{
-            self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+            refreshControl?.endRefreshing()
+            tableView.reloadData()
         }
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("\(__FUNCTION__): \(error)")
-        self.refreshControl?.endRefreshing()
-        self.tableView.reloadData()
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
     }
     
     //MARK: - Server Communication
@@ -120,7 +120,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             for result in resultList{
                 venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as NSDictionary))
             }
-            self.tableView.reloadData()
+            tableView.reloadData()
             return venueList
             
         }else{
@@ -152,12 +152,12 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
             messageLabel.sizeToFit()
             
-            self.tableView.backgroundView = messageLabel;
-            self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
+            tableView.backgroundView = messageLabel;
+            tableView.separatorStyle = .None
             return 0
             
         }else{
-            self.tableView.separatorStyle=UITableViewCellSeparatorStyle.SingleLine
+            tableView.separatorStyle = .SingleLine
             return 1
         }
     }
