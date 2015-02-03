@@ -56,25 +56,31 @@ class CoffeeEntryTableViewCell: UITableViewCell {
                 }
                 
                 //Get photo if photo is available
-                if venueItem.hasPhoto{
+                switch venueItem.photo{
+                case .Present(let photoPrefix, let photoSuffix):
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)){
                         //Getting image in background
                         //Construct URL to get the image
+                        let shopId = venueItem.shopId
                         let photoRes = "\(self.thumbnailRes)x\(self.thumbnailRes)"
-                        var urlString = "\(venueItem.photoPrefix)\(photoRes)\(venueItem.photoSuffix)"
-                        
+                        var urlString = "\(photoPrefix)\(photoRes)\(photoSuffix)"
                         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
                         let image: UIImage? = UIImage(data: NSData(contentsOfURL: NSURL(string: urlString)!)!)
                         UIApplication.sharedApplication().networkActivityIndicatorVisible=false
                         
                         dispatch_async(dispatch_get_main_queue()){
-                            self.shopImage.image = image
+                            if (self.venue != nil && self.venue!.shopId == shopId){
+                                self.shopImage.image = image
+                            }
                         }
                     }
+                default:
+                    break
                 }
             }
         }
     }
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

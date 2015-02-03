@@ -13,7 +13,6 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var featuredImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var callCell: UITableViewCell!
     
     var venue:Venue?
@@ -26,7 +25,8 @@ class CoffeeDetailTableViewController: UITableViewController {
         featuredImage.clipsToBounds = true
         
         //Call cell is hidden until the phone number is found
-        callCell.hidden = true
+        callCell.textLabel!.text = "Getting Contact Info..."
+        callCell.detailTextLabel!.text = "Please wait a moment."
         if let venueItem = venue{
             //Set Name
             navigationItem.title=venueItem.shopName
@@ -35,17 +35,20 @@ class CoffeeDetailTableViewController: UITableViewController {
             addressLabel.text = venueItem.address.stringByReplacingOccurrencesOfString("\n", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
            
             //Get image
-            if venueItem.hasPhoto{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)) {
-                    
+            switch venueItem.photo{
+            case .Present(let photoPrefix, let photoSuffix):
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)){
+                    //Getting image in background
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                    let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(venueItem.photoPrefix)\(self.res)\(venueItem.photoSuffix)")!)!)
+                    let img = UIImage(data: NSData(contentsOfURL: NSURL(string: "\(photoPrefix)\(self.res)\(photoSuffix)")!)!)
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(dispatch_get_main_queue()){
                         self.featuredImage.image = img
                     }
                 }
+            default:
+                break
             }
             
             //Get contact info request
@@ -60,24 +63,22 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     //Get the contact details (if any) from server
     func getVenueDetail(venueItem: Venue){
-        let urlRequest = NSURLRequest(URL: venueUrl(venueItem.shopId)!)
         
+        let session = NSURLSession.sharedSession()
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
         // Send url request on async
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
-            
+        session.dataTaskWithURL(venueUrl(venueItem.shopId)!, completionHandler: {data, urlResponse, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible=false
-            
             // If error, print error and escape
             if urlResponse.isKindOfClass(NSHTTPURLResponse){
                 let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
                 if statusCode != 200{
-                    println("\(__FUNCTION__): sendAsynchronousRequest status code != 200: response = \(urlResponse)")
+                    println("\(__FUNCTION__): dataTaskWithURL status code != 200: response = \(urlResponse)")
                     return
                 }
             }
             self.extractPhoneNumberFromData(data)
-        })
+        }).resume()
     }
     
     func extractPhoneNumberFromData(data:NSData){
@@ -86,14 +87,22 @@ class CoffeeDetailTableViewController: UITableViewController {
         if let dict = jsonDict{
             if let venueItem = venue{
                 venueItem.venueDetailDict = dict
-                if venueItem.hasPhoneNumber{
-                    callCell.hidden = false
-                    if venueItem.formattedNumber==""{
-                        phoneNumberLabel.text = venueItem.phoneNumber
-                    }else{
-                        phoneNumberLabel.text = venueItem.formattedNumber
+                
+                //UI activity must be held on the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    switch(venueItem.contact){
+                    case .None:
+                        self.callCell.textLabel!.text = "No Contact Info Retrieved"
+                        self.callCell.detailTextLabel!.text = ""
+                    case .Present(let phoneNumber, let formattedNumber):
+                        self.callCell.textLabel!.text = "Call Shop"
+                        if formattedNumber==""{
+                            self.callCell.detailTextLabel!.text = phoneNumber
+                        }else{
+                            self.callCell.detailTextLabel!.text = formattedNumber
+                        }
                     }
-                }
+                })
             }
         }else{
             //if jsonDict is nil means parsing has failed.
@@ -119,8 +128,11 @@ class CoffeeDetailTableViewController: UITableViewController {
             case 1:
                 //Make a call if there is a phone number
                 if let venueItem = venue{
-                    if venueItem.hasPhoneNumber{
-                        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(venueItem.phoneNumber)")!)
+                    switch(venueItem.contact){
+                    case .None:
+                        break
+                    case .Present(let phoneNumber, let formattedPhoneNumber):
+                        UIApplication.sharedApplication().openURL(NSURL(string: "tel:\(phoneNumber)")!)
                     }
                 }
                 return

@@ -20,20 +20,20 @@ class Venue {
     
     var isOpen: Bool = false
     var openStatus: String = ""
-    
-    var photoPrefix: String = ""
-    var photoSuffix: String = ""
-    var hasPhoto: Bool {
-        return (photoPrefix != "" && photoSuffix != "")
+
+    enum Photo{
+        case None
+        case Present(prefix: String,suffix: String)
     }
+    var photo: Photo = .None
     
     var coordinates:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
-    var phoneNumber = ""
-    var formattedNumber = ""
-    var hasPhoneNumber:Bool{
-        return phoneNumber != ""
+    enum Contact{
+        case None
+        case Present(phoneNumber:String, formattedPhoneNumber:String)
     }
+    var contact:Contact = .None
     
     var venueDict:NSDictionary?
     var venueDetailDict:NSDictionary?{
@@ -45,9 +45,10 @@ class Venue {
                 if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
                     //Contact info exists
                     if let number = contactDict.objectForKey("phone") as String?{
-                        phoneNumber = number
                         if let fNumber = contactDict.objectForKey("formattedPhone") as String?{
-                            formattedNumber = fNumber
+                            contact = .Present(phoneNumber:number,formattedPhoneNumber:fNumber)
+                        }else{
+                            contact = .Present(phoneNumber:number,formattedPhoneNumber:"")
                         }
                     }
                 }
@@ -94,14 +95,13 @@ class Venue {
         
         //Set Photo URL
         
-        if let photo = venue.objectForKey("featuredPhotos") as NSDictionary? {
+        if let photoItem = venue.objectForKey("featuredPhotos") as NSDictionary? {
             //Has Photo
-            if let itemsArray = photo.objectForKey("items") as NSArray?{
+            if let itemsArray = photoItem.objectForKey("items") as NSArray?{
                 let itemsDict = itemsArray.firstObject as NSDictionary?
                 if let photoUrlPrefix = itemsDict?.objectForKey("prefix") as? String{
                     if let photoUrlSuffix = itemsDict?.objectForKey("suffix") as? String{
-                        photoPrefix = photoUrlPrefix
-                        photoSuffix = photoUrlSuffix
+                        photo = Photo.Present(prefix:photoUrlPrefix,suffix:photoUrlSuffix)
                     }
                 }
             }
