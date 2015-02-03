@@ -63,24 +63,24 @@ class CoffeeDetailTableViewController: UITableViewController {
     
     //Get the contact details (if any) from server
     func getVenueDetail(venueItem: Venue){
-        let urlRequest = NSURLRequest(URL: venueUrl(venueItem.shopId)!)
         
+        let session = NSURLSession.sharedSession()
         UIApplication.sharedApplication().networkActivityIndicatorVisible=true
+        
         // Send url request on async
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler:{urlResponse, data, error in
-            
+        session.dataTaskWithURL(venueUrl(venueItem.shopId)!, completionHandler: {data, urlResponse, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible=false
             
             // If error, print error and escape
             if urlResponse.isKindOfClass(NSHTTPURLResponse){
                 let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
                 if statusCode != 200{
-                    println("\(__FUNCTION__): sendAsynchronousRequest status code != 200: response = \(urlResponse)")
+                    println("\(__FUNCTION__): dataTaskWithURL status code != 200: response = \(urlResponse)")
                     return
                 }
             }
             self.extractPhoneNumberFromData(data)
-        })
+        }).resume()
     }
     
     func extractPhoneNumberFromData(data:NSData){
