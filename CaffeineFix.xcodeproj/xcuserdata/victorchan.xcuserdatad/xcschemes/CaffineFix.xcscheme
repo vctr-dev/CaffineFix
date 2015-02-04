@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EBD4D7C1A7C49CB002218A2"
-               BuildableName = "CaffineFix.app"
-               BlueprintName = "CaffineFix"
-               ReferencedContainer = "container:CaffineFix.xcodeproj">
+               BuildableName = "CaffeineFix.app"
+               BlueprintName = "CaffeineFix"
+               ReferencedContainer = "container:CaffeineFix.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EBD4D911A7C49CC002218A2"
-               BuildableName = "CaffineFixTests.xctest"
-               BlueprintName = "CaffineFixTests"
-               ReferencedContainer = "container:CaffineFix.xcodeproj">
+               BuildableName = "CaffeineFixTests.xctest"
+               BlueprintName = "CaffeineFixTests"
+               ReferencedContainer = "container:CaffeineFix.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EBD4D911A7C49CC002218A2"
-               BuildableName = "CaffineFixTests.xctest"
-               BlueprintName = "CaffineFixTests"
-               ReferencedContainer = "container:CaffineFix.xcodeproj">
+               BuildableName = "CaffeineFixTests.xctest"
+               BlueprintName = "CaffeineFixTests"
+               ReferencedContainer = "container:CaffeineFix.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBD4D7C1A7C49CB002218A2"
-            BuildableName = "CaffineFix.app"
-            BlueprintName = "CaffineFix"
-            ReferencedContainer = "container:CaffineFix.xcodeproj">
+            BuildableName = "CaffeineFix.app"
+            BlueprintName = "CaffeineFix"
+            ReferencedContainer = "container:CaffeineFix.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBD4D7C1A7C49CB002218A2"
-            BuildableName = "CaffineFix.app"
-            BlueprintName = "CaffineFix"
-            ReferencedContainer = "container:CaffineFix.xcodeproj">
+            BuildableName = "CaffeineFix.app"
+            BlueprintName = "CaffeineFix"
+            ReferencedContainer = "container:CaffeineFix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EBD4D7C1A7C49CB002218A2"
-            BuildableName = "CaffineFix.app"
-            BlueprintName = "CaffineFix"
-            ReferencedContainer = "container:CaffineFix.xcodeproj">
+            BuildableName = "CaffeineFix.app"
+            BlueprintName = "CaffeineFix"
+            ReferencedContainer = "container:CaffeineFix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

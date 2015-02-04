@@ -1,6 +1,6 @@
 //
-//  CaffineFixTests.swift
-//  CaffineFixTests
+//  CaffeineFixTests.swift
+//  CaffeineFixTests
 //
 //  Created by Victor Chan on 31/1/15.
 //  Copyright (c) 2015 Spark Plug Studio. All rights reserved.
@@ -8,9 +8,9 @@
 
 import UIKit
 import XCTest
-import CaffineFix
+import CaffeineFix
 
-class CaffineFixTests: XCTestCase {
+class CaffeineFixTests: XCTestCase {
     let mockLL = "37.33240905,-122.03051211"
     let mockVenueId = "4dd1a2d652b15d0acc6c89dd"
     let coffeeListTableViewController = CoffeeListTableViewController()
@@ -72,6 +72,7 @@ class CaffineFixTests: XCTestCase {
                 XCTAssertNotNil(venue, "venue is nil")
                 XCTAssertTrue(venue.isKindOfClass(Venue), "venue is not a kind of Venue")
             }
+            XCTAssertEqual(venueList.count, 30, "Number of venues extracted is wrong")
         }else{
             XCTFail("Mock Json file not read")
         }

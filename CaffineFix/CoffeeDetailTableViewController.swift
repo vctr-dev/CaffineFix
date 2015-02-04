@@ -1,6 +1,6 @@
 //
 //  CoffeeDetailTableViewController.swift
-//  CaffineFix
+//  CaffeineFix
 //
 //  Created by Victor Chan on 1/2/15.
 //  Copyright (c) 2015 Spark Plug Studio. All rights reserved.

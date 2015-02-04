@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Caffine Fix-->
+        <!--Caffeine Fix-->
         <scene sceneID="S3T-DL-fRp">
             <objects>
                 <tableViewController id="jYC-Ao-cTA" customClass="CoffeeListTableViewController" customModule="CaffineFix" customModuleProvider="target" sceneMemberID="viewController">
@@ -135,7 +135,7 @@ Second line of address</string>
                             <outlet property="delegate" destination="jYC-Ao-cTA" id="K9d-ap-6tb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Caffine Fix" id="RJA-cd-ioe"/>
+                    <navigationItem key="navigationItem" title="Caffeine Fix" id="RJA-cd-ioe"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBC-za-nNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

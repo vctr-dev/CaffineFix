@@ -10,11 +10,12 @@
 		4E14BF551A7E0E8D00D44D11 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E14BF541A7E0E8D00D44D11 /* Venue.swift */; };
 		4E377E4B1A7E3F820056B239 /* CoffeeDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */; };
 		4E563D2F1A7DF5B600CBCBF7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */; };
+		4E5EAE381A81FF3800E604FF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E5EAE371A81FF3800E604FF /* Default-568h@2x.png */; };
 		4EBD4D831A7C49CB002218A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */; };
 		4EBD4D881A7C49CB002218A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D861A7C49CB002218A2 /* Main.storyboard */; };
 		4EBD4D8A1A7C49CB002218A2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D891A7C49CB002218A2 /* Images.xcassets */; };
 		4EBD4D8D1A7C49CB002218A2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD4D8B1A7C49CB002218A2 /* LaunchScreen.xib */; };
-		4EBD4D991A7C49CC002218A2 /* CaffineFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D981A7C49CC002218A2 /* CaffineFixTests.swift */; };
+		4EBD4D991A7C49CC002218A2 /* CaffeineFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D981A7C49CC002218A2 /* CaffeineFixTests.swift */; };
 		4EBD4DA51A7C7045002218A2 /* CoffeeEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4DA41A7C7045002218A2 /* CoffeeEntryTableViewCell.swift */; };
 		4EBD4DA71A7C84DF002218A2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4DA61A7C84DF002218A2 /* Constants.swift */; };
 		4ECAD45C1A7F6D8200E67147 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */; };
@@ -42,15 +43,16 @@
 		4E14BF541A7E0E8D00D44D11 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		4E377E4A1A7E3F820056B239 /* CoffeeDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeDetailTableViewController.swift; sourceTree = "<group>"; };
 		4E563D2E1A7DF5B600CBCBF7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		4EBD4D7D1A7C49CB002218A2 /* CaffineFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffineFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E5EAE371A81FF3800E604FF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4EBD4D7D1A7C49CB002218A2 /* CaffeineFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffeineFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBD4D811A7C49CB002218A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EBD4D871A7C49CB002218A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EBD4D891A7C49CB002218A2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4EBD4D8C1A7C49CB002218A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4EBD4D921A7C49CC002218A2 /* CaffineFixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffineFixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBD4D921A7C49CC002218A2 /* CaffeineFixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeineFixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBD4D971A7C49CC002218A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4EBD4D981A7C49CC002218A2 /* CaffineFixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffineFixTests.swift; sourceTree = "<group>"; };
+		4EBD4D981A7C49CC002218A2 /* CaffeineFixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeineFixTests.swift; sourceTree = "<group>"; };
 		4EBD4DA21A7C500E002218A2 /* CoffeeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeListTableViewController.swift; sourceTree = "<group>"; };
 		4EBD4DA41A7C7045002218A2 /* CoffeeEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeeEntryTableViewCell.swift; sourceTree = "<group>"; };
 		4EBD4DA61A7C84DF002218A2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -79,8 +81,9 @@
 		4EBD4D741A7C49CB002218A2 = {
 			isa = PBXGroup;
 			children = (
-				4EBD4D7F1A7C49CB002218A2 /* CaffineFix */,
-				4EBD4D951A7C49CC002218A2 /* CaffineFixTests */,
+				4E5EAE371A81FF3800E604FF /* Default-568h@2x.png */,
+				4EBD4D7F1A7C49CB002218A2 /* CaffeineFix */,
+				4EBD4D951A7C49CC002218A2 /* CaffeineFixTests */,
 				4EBD4D7E1A7C49CB002218A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,13 +91,13 @@
 		4EBD4D7E1A7C49CB002218A2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD4D7D1A7C49CB002218A2 /* CaffineFix.app */,
-				4EBD4D921A7C49CC002218A2 /* CaffineFixTests.xctest */,
+				4EBD4D7D1A7C49CB002218A2 /* CaffeineFix.app */,
+				4EBD4D921A7C49CC002218A2 /* CaffeineFixTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4EBD4D7F1A7C49CB002218A2 /* CaffineFix */ = {
+		4EBD4D7F1A7C49CB002218A2 /* CaffeineFix */ = {
 			isa = PBXGroup;
 			children = (
 				4EBD4D821A7C49CB002218A2 /* AppDelegate.swift */,
@@ -108,6 +111,7 @@
 				4EBD4D8B1A7C49CB002218A2 /* LaunchScreen.xib */,
 				4EBD4D801A7C49CB002218A2 /* Supporting Files */,
 			);
+			name = CaffeineFix;
 			path = CaffineFix;
 			sourceTree = "<group>";
 		};
@@ -120,13 +124,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4EBD4D951A7C49CC002218A2 /* CaffineFixTests */ = {
+		4EBD4D951A7C49CC002218A2 /* CaffeineFixTests */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD4D981A7C49CC002218A2 /* CaffineFixTests.swift */,
+				4EBD4D981A7C49CC002218A2 /* CaffeineFixTests.swift */,
 				4ECAD4631A7F834700E67147 /* exploreResultMocked */,
 				4EBD4D961A7C49CC002218A2 /* Supporting Files */,
 			);
+			name = CaffeineFixTests;
 			path = CaffineFixTests;
 			sourceTree = "<group>";
 		};
@@ -141,9 +146,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4EBD4D7C1A7C49CB002218A2 /* CaffineFix */ = {
+		4EBD4D7C1A7C49CB002218A2 /* CaffeineFix */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EBD4D9C1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffineFix" */;
+			buildConfigurationList = 4EBD4D9C1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffeineFix" */;
 			buildPhases = (
 				4EBD4D791A7C49CB002218A2 /* Sources */,
 				4EBD4D7A1A7C49CB002218A2 /* Frameworks */,
@@ -153,14 +158,14 @@
 			);
 			dependencies = (
 			);
-			name = CaffineFix;
+			name = CaffeineFix;
 			productName = CaffineFix;
-			productReference = 4EBD4D7D1A7C49CB002218A2 /* CaffineFix.app */;
+			productReference = 4EBD4D7D1A7C49CB002218A2 /* CaffeineFix.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4EBD4D911A7C49CC002218A2 /* CaffineFixTests */ = {
+		4EBD4D911A7C49CC002218A2 /* CaffeineFixTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EBD4D9F1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffineFixTests" */;
+			buildConfigurationList = 4EBD4D9F1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffeineFixTests" */;
 			buildPhases = (
 				4EBD4D8E1A7C49CC002218A2 /* Sources */,
 				4EBD4D8F1A7C49CC002218A2 /* Frameworks */,
@@ -171,9 +176,9 @@
 			dependencies = (
 				4EBD4D941A7C49CC002218A2 /* PBXTargetDependency */,
 			);
-			name = CaffineFixTests;
+			name = CaffeineFixTests;
 			productName = CaffineFixTests;
-			productReference = 4EBD4D921A7C49CC002218A2 /* CaffineFixTests.xctest */;
+			productReference = 4EBD4D921A7C49CC002218A2 /* CaffeineFixTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -194,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4EBD4D781A7C49CB002218A2 /* Build configuration list for PBXProject "CaffineFix" */;
+			buildConfigurationList = 4EBD4D781A7C49CB002218A2 /* Build configuration list for PBXProject "CaffeineFix" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -207,8 +212,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4EBD4D7C1A7C49CB002218A2 /* CaffineFix */,
-				4EBD4D911A7C49CC002218A2 /* CaffineFixTests */,
+				4EBD4D7C1A7C49CB002218A2 /* CaffeineFix */,
+				4EBD4D911A7C49CC002218A2 /* CaffeineFixTests */,
 			);
 		};
 /* End PBXProject section */
@@ -221,6 +226,7 @@
 				4ECAD4661A7F85CC00E67147 /* exploreResultMocked in Resources */,
 				4EBD4D881A7C49CB002218A2 /* Main.storyboard in Resources */,
 				4EBD4D8D1A7C49CB002218A2 /* LaunchScreen.xib in Resources */,
+				4E5EAE381A81FF3800E604FF /* Default-568h@2x.png in Resources */,
 				4EBD4D8A1A7C49CB002218A2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,7 +261,7 @@
 			files = (
 				4ECAD45C1A7F6D8200E67147 /* AppDelegate.swift in Sources */,
 				4ECAD4611A7F6DC000E67147 /* Venue.swift in Sources */,
-				4EBD4D991A7C49CC002218A2 /* CaffineFixTests.swift in Sources */,
+				4EBD4D991A7C49CC002218A2 /* CaffeineFixTests.swift in Sources */,
 				4ECAD45F1A7F6DBB00E67147 /* CoffeeEntryTableViewCell.swift in Sources */,
 				4ECAD4621A7F6DC300E67147 /* Constants.swift in Sources */,
 				4ECAD45D1A7F6DA000E67147 /* CoffeeListTableViewController.swift in Sources */,
@@ -268,7 +274,7 @@
 /* Begin PBXTargetDependency section */
 		4EBD4D941A7C49CC002218A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4EBD4D7C1A7C49CB002218A2 /* CaffineFix */;
+			target = 4EBD4D7C1A7C49CB002218A2 /* CaffeineFix */;
 			targetProxy = 4EBD4D931A7C49CC002218A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -376,7 +382,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CaffineFix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CaffeineFix;
 			};
 			name = Debug;
 		};
@@ -386,7 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CaffineFix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CaffeineFix;
 			};
 			name = Release;
 		};
@@ -404,8 +410,8 @@
 				);
 				INFOPLIST_FILE = CaffineFixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffineFix.app/CaffineFix";
+				PRODUCT_NAME = CaffeineFixTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffeineFix.app/CaffeineFix";
 			};
 			name = Debug;
 		};
@@ -419,15 +425,15 @@
 				);
 				INFOPLIST_FILE = CaffineFixTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffineFix.app/CaffineFix";
+				PRODUCT_NAME = CaffeineFixTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffeineFix.app/CaffeineFix";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4EBD4D781A7C49CB002218A2 /* Build configuration list for PBXProject "CaffineFix" */ = {
+		4EBD4D781A7C49CB002218A2 /* Build configuration list for PBXProject "CaffeineFix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EBD4D9A1A7C49CC002218A2 /* Debug */,
@@ -436,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EBD4D9C1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffineFix" */ = {
+		4EBD4D9C1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffeineFix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EBD4D9D1A7C49CC002218A2 /* Debug */,
@@ -445,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EBD4D9F1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffineFixTests" */ = {
+		4EBD4D9F1A7C49CC002218A2 /* Build configuration list for PBXNativeTarget "CaffeineFixTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EBD4DA01A7C49CC002218A2 /* Debug */,
