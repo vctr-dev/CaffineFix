@@ -71,7 +71,7 @@ class CoffeeDetailTableViewController: UITableViewController {
             UIApplication.sharedApplication().networkActivityIndicatorVisible=false
             // If error, print error and escape
             if urlResponse.isKindOfClass(NSHTTPURLResponse){
-                let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
+                let statusCode = (urlResponse as! NSHTTPURLResponse).statusCode
                 if statusCode != 200{
                     println("\(__FUNCTION__): dataTaskWithURL status code != 200: response = \(urlResponse)")
                     return

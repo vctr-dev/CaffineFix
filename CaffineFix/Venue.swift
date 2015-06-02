@@ -40,12 +40,12 @@ class Venue {
         didSet{
             if let dict = venueDetailDict{
                 //Contact info is in response -> venue -> contact
-                let responseDict = dict.objectForKey("response")! as NSDictionary
-                let venueDict = responseDict.objectForKey("venue")! as NSDictionary
-                if let contactDict = venueDict.objectForKey("contact") as NSDictionary?{
+                let responseDict = dict.objectForKey("response")! as! NSDictionary
+                let venueDict = responseDict.objectForKey("venue")! as! NSDictionary
+                if let contactDict = venueDict.objectForKey("contact") as! NSDictionary?{
                     //Contact info exists
-                    if let number = contactDict.objectForKey("phone") as String?{
-                        if let fNumber = contactDict.objectForKey("formattedPhone") as String?{
+                    if let number = contactDict.objectForKey("phone") as! String?{
+                        if let fNumber = contactDict.objectForKey("formattedPhone") as! String?{
                             contact = .Present(phoneNumber:number,formattedPhoneNumber:fNumber)
                         }else{
                             contact = .Present(phoneNumber:number,formattedPhoneNumber:"")
@@ -74,20 +74,20 @@ class Venue {
         }
         
         //Set Price
-        let priceRatingDict = venue.objectForKey("price") as NSDictionary?
+        let priceRatingDict = venue.objectForKey("price") as! NSDictionary?
         
-        if let priceRatingInt = priceRatingDict?.objectForKey("tier") as Int?{
+        if let priceRatingInt = priceRatingDict?.objectForKey("tier") as! Int?{
             priceRating = priceRatingInt
         }
         
         //Set opening hours
         
-        let openingHoursDict = venue.objectForKey("hours") as NSDictionary?
-        if let openingHours = openingHoursDict?.objectForKey("status") as String? {
+        let openingHoursDict = venue.objectForKey("hours") as! NSDictionary?
+        if let openingHours = openingHoursDict?.objectForKey("status") as! String? {
             //Has status
             openStatus = openingHours
             
-            if let isOpenBool = openingHoursDict?.objectForKey("isOpen") as Bool?{
+            if let isOpenBool = openingHoursDict?.objectForKey("isOpen") as! Bool?{
                 //Know if its open or not
                 isOpen = isOpenBool
             }
@@ -95,10 +95,10 @@ class Venue {
         
         //Set Photo URL
         
-        if let photoItem = venue.objectForKey("featuredPhotos") as NSDictionary? {
+        if let photoItem = venue.objectForKey("featuredPhotos") as! NSDictionary? {
             //Has Photo
-            if let itemsArray = photoItem.objectForKey("items") as NSArray?{
-                let itemsDict = itemsArray.firstObject as NSDictionary?
+            if let itemsArray = photoItem.objectForKey("items") as! NSArray?{
+                let itemsDict = itemsArray.firstObject as! NSDictionary?
                 if let photoUrlPrefix = itemsDict?.objectForKey("prefix") as? String{
                     if let photoUrlSuffix = itemsDict?.objectForKey("suffix") as? String{
                         photo = Photo.Present(prefix:photoUrlPrefix,suffix:photoUrlSuffix)
@@ -110,8 +110,8 @@ class Venue {
     
     func extractLocationInfoFromLocationDict(location:NSDictionary){
         //Set coordinate
-        coordinates.latitude = location.objectForKey("lat") as CLLocationDegrees
-        coordinates.longitude = location.objectForKey("lng") as CLLocationDegrees
+        coordinates.latitude = location.objectForKey("lat") as! CLLocationDegrees
+        coordinates.longitude = location.objectForKey("lng") as! CLLocationDegrees
         
         //Set shop address
         if let addressString = location.objectForKey("address") as? String{
@@ -119,7 +119,7 @@ class Venue {
         }
         
         if let crossStreet = location.objectForKey("crossStreet") as? String{
-            if countElements(address)==0{
+            if count(address)==0{
                 address = crossStreet
             }else{
                 address = "\(address) \n(\(crossStreet))"
@@ -127,7 +127,7 @@ class Venue {
         }
         
         if let city = location.objectForKey("city") as? String{
-            if countElements(address)==0{
+            if count(address)==0{
                 address = city
             }else{
                 address = "\(address) \n\(city)"
@@ -135,7 +135,7 @@ class Venue {
         }
         
         if let state = location.objectForKey("state") as? String{
-            if countElements(address)==0{
+            if count(address)==0{
                 address = state
             }else{
                 address = "\(address) \(state)"

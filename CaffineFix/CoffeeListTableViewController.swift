@@ -60,7 +60,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     // MARK: - Location manager delegate
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         //Handles location retrieved by location manager
-        if let location = locations.last as CLLocation?{
+        if let location = locations.last as! CLLocation?{
             let coordinate = location.coordinate
             getDataFromServer("\(coordinate.latitude),\(coordinate.longitude)")
         }else{
@@ -93,7 +93,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             // If error, print error and escape
             if let urlResponse = response{
                 if urlResponse.isKindOfClass(NSHTTPURLResponse){
-                    let statusCode = (urlResponse as NSHTTPURLResponse).statusCode
+                    let statusCode = (urlResponse as! NSHTTPURLResponse).statusCode
                     if statusCode != 200{
                         println("\(__FUNCTION__): dataTaskWithURL status code != 200: response = \(urlResponse)")
                         return
@@ -109,15 +109,15 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
         let jsonDict: NSDictionary? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error) as? NSDictionary
         if let dict = jsonDict{
             //Venue items are in response -> groups -> items
-            let responseDict = dict.objectForKey("response")! as NSDictionary
-            let groupsArray = responseDict.objectForKey("groups")! as NSArray
-            let groupsDict = groupsArray.firstObject as NSDictionary
-            let resultList = groupsDict.objectForKey("items")! as NSArray
+            let responseDict = dict.objectForKey("response")! as! NSDictionary
+            let groupsArray = responseDict.objectForKey("groups")! as! NSArray
+            let groupsDict = groupsArray.firstObject as! NSDictionary
+            let resultList = groupsDict.objectForKey("items")! as! NSArray
             
             //Extracting out the venues array from the list and put into new array
             venueList = NSArray()
             for result in resultList{
-                venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as NSDictionary))
+                venueList = venueList.arrayByAddingObject(Venue(venue:result.objectForKey("venue") as! NSDictionary))
             }
             tableView.reloadData()
             return venueList
@@ -137,7 +137,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
             // Display a message when the table is empty
             let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             
-            if let refresher = self.refreshControl?{
+            if let refresher = self.refreshControl{
                 if refresher.refreshing{
                     messageLabel.text = "Brewing..."
                 }else{
@@ -167,7 +167,7 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as CoffeeEntryTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CoffeeEntryTableViewCell
         if let venueItem = venueList.objectAtIndex(indexPath.row) as? Venue{
             cell.venue = venueItem
         }
@@ -179,9 +179,9 @@ class CoffeeListTableViewController: UITableViewController,CLLocationManagerDele
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //Pass the right venue to the destination view controller
-        let destVC = segue.destinationViewController as CoffeeDetailTableViewController
+        let destVC = segue.destinationViewController as! CoffeeDetailTableViewController
         let selectedCellIndexPath = tableView.indexPathForSelectedRow()
-        let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as CoffeeEntryTableViewCell
+        let selectedCell = tableView.cellForRowAtIndexPath(selectedCellIndexPath!) as! CoffeeEntryTableViewCell
         destVC.venue = selectedCell.venue
         self.tableView.deselectRowAtIndexPath(selectedCellIndexPath!, animated: true)
     }
